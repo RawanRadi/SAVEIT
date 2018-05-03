@@ -1,0 +1,75 @@
+﻿@model SaVeIT_Final.Models.User2
+@{
+    Layout = null;
+}
+@Styles.Render("~/Content/LoginStyle.css")
+@*<script src="https://ajax.googleapis.com/ajax/libs/jquery/1."*@
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Login</title>
+    <link href="~/Content/bootstrap.css" rel="stylesheet" type="text/css" />
+</head>
+
+<body>
+    <div class="navbar navbar-default navbar-fixed-top navbar-toggleable-md navbar-expand-lg scrolling-navbar double-nav">
+        <div class="container">
+            <div class="navbar-header">
+                @Html.ActionLink("Smart Archive for IT senior projects at KAU", "Index", "Login", new { area = "" }, new { @class = "navbar-brand navbar-center" })
+            </div>
+        </div>
+    </div>
+
+    <div id="login-div">
+        @using (Html.BeginForm("Index", "Login", FormMethod.Post))
+        {
+            <div style="text-align: center; margin-bottom:20px;"><img href="#" src="~/images/logo.png" /></div>
+            <p class="header">Log In</p>
+            <p>Login by your acount at King Abdulaziz University</p>
+            <table>
+
+                <tr>
+                    <td>
+                        @Html.LabelFor(model => model.userId)
+                    </td>
+                    <td>
+                        @Html.EditorFor(model => model.userId, new { htmlAttributes = new { @class = "form-control" } })
+                    </td>
+                </tr>
+                <tr>
+                    <td> </td>
+                    <td>@Html.ValidationMessageFor(Model => Model.userId)</td>
+                </tr>
+                <tr>
+                    <td>
+                        @Html.LabelFor(model => model.password)
+                    </td>
+                    <td>
+                        @Html.EditorFor(model => model.password, new { htmlAttributes = new { @class = "form-control" } })
+                    </td>
+                </tr>
+                <tr>
+                    <td> </td>
+                    <td>@Html.ValidationMessageFor(Model => Model.password)</td>
+                </tr>
+
+            </table>
+            <p style="color:red; text-align:center">@ViewBag.ErrorMessage</p>
+            <div style="text-align:center">
+                <input type="submit" id="logbtn" value="Login" />
+                <p>
+                    If you are visitor you can <a href="~/Home/Index">Skip</a>
+                </p>
+            </div>
+        }
+    </div>
+    <hr />
+    
+    <script src="~/Scripts/jquery-1.10.2.min.js"></script>
+    <script src="~/Scripts/jquery.validate.min.js"></script>
+    <script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
+
+</body>
+</html>

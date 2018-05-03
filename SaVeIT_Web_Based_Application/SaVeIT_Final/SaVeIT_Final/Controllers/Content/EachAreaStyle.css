@@ -1,0 +1,35 @@
+﻿body {
+
+}
+
+.panel {
+    -webkit-transition-property: scale;
+    -webkit-transition-duration: 0.2s;
+    -webkit-transition-timing-function: ease-in-out;
+    -moz-transition: all 0.2s ease-in-out;
+    background-color:black;
+    display:inline-block;
+}
+
+    .panel:hover {
+        box-shadow: 0 0 10px rgba(0,0,0,.5);
+        -moz-box-shadow: 0 0 10px rgba(0,0,0,.5);
+        -webkit-box-shadow: 0 0 10px rgba(0,0,0,.5);
+        -webkit-transform: scale(1.05);
+        -moz-transform: scale(1.05);
+    }
+
+
+.img-circle {
+    height: 60px;
+    width: 60px;
+    object-fit: cover;
+
+    // here -o-object-fit: cover;
+}
+
+
+.list-group-item {
+    border: none;
+}
+

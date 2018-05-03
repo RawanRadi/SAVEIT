@@ -1,0 +1,26 @@
+﻿@model IEnumerable<SaVeIT_Final.Models.SeniorProject>
+
+@{
+    /**/
+
+    ViewBag.Title = "Show";
+    Layout = "~/Views/Shared/_Layout3.cshtml";
+}
+
+<h2>Show </h2>
+
+<div style="border:dotted 2px">
+
+    @Html.DisplayNameFor(model => model.SPName)
+
+</div>
+@foreach (var name in Model)
+{
+    @Html.DisplayFor(modelItem => name.SPName)
+
+}
+
+
+<div>
+    @Html.ActionLink("Back to List", "AOIAdmin")
+</div>

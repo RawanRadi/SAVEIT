@@ -1,0 +1,71 @@
+﻿
+#login-div {
+    display: block;
+    height: auto;
+    max-width: 50%;
+    position: absolute;
+    left: 35%;
+    top: 20%;
+    border: 1px solid #ccc;
+    border-radius: 15px 50px;
+    padding: 70px 40px;
+    margin-bottom: 30px;
+    background-color: white;
+}
+
+.field-validation-error {
+    color: red;
+}
+
+.footer {
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    background-color: black;
+    color: white;
+    text-align: center;
+}
+
+#logbtn {
+    font-size: 14px;
+    margin-right: 4px 2px;
+    background-color: white;
+    color: black;
+    border: 1px solid black;
+    padding: 5px 32px;
+    -webkit-transition-duration: 0.4s; /* Safari */
+    transition-duration: 0.4s;
+    border-radius: 5px;
+}
+
+    #logbtn:hover {
+        background-color: #4CAF50;
+        color: white;
+    }
+
+tr {
+    height: 20px;
+}
+
+.header {
+    text-align: center;
+    font-size: 20px;
+    color: forestgreen;
+    font-weight: bold;
+    //margin-bottom:30px;
+}
+
+body, html {
+    height: 100%;
+}
+
+body {
+    //background-image: url(/Images/kau_image_4.jpg);
+    background-repeat: no-repeat;
+    height: 100%;
+    /* Center and scale the image nicely */
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}

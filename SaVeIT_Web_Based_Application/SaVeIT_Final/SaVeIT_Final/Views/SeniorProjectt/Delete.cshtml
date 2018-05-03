@@ -1,0 +1,90 @@
+﻿@model SaVeIT_Final.Models.SeniorProject
+
+@{
+    ViewBag.Title = "Delete";
+    Layout = "~/Views/Shared/_Layout3.cshtml";
+}
+
+<h2>Delete</h2>
+
+<h3>Are you sure you want to delete this?</h3>
+<div>
+    <h4>Senior Project</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayName("Name")
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.SPName)
+        </dd>
+
+        <dt>
+            @Html.DisplayName("Abstract")
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.SPAbstract)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Year)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Year)
+        </dd>
+
+        @if (Model.SPGrade != null)
+        {
+            <dt>
+                @Html.DisplayName("Grade")
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.SPGrade)
+            </dd>
+        }
+        @if (Model.SPVideos != null)
+        {
+            <dt>
+                @Html.DisplayName("Video")
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.SPVideos)
+            </dd>
+        }
+        @if (Model.awardId != null)
+        {
+            <dt>
+                @Html.DisplayNameFor(model => model.Award.awardName)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.Award.awardName)
+            </dd>
+        }
+
+
+        <dt>
+            @Html.DisplayName("Supervisor")
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Supervisor.supervisorName)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Delete" class="btn btn-default" /> |
+            @Html.ActionLink("Back to List", "Projects", "SeniorProjectt")
+        </div>
+    }
+</div>

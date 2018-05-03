@@ -1,0 +1,140 @@
+﻿       @model IEnumerable<SaVeIT_Final.Models.SeniorProject>
+
+@{
+    ViewBag.Title = "EachAreaAdmin2";
+    Layout = "~/Views/Shared/_Layout3.cshtml";
+}
+
+<head>
+    <title>Bootstrap Example</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+    <script src="https://cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/1.10.16/js/dataTables.bootstrap.min.js"></script>
+    <link href="https//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https//code.jquery.com/jquery-1.11.1.min.js"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.4.0/css/font-awesome.min.css" rel='stylesheet' type='text/css'>
+
+    <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+    <link rel="stylesheet" href="http://cdn.datatables.net/1.10.2/css/jquery.dataTables.min.css">
+    <script type="text/javascript" src="http://cdn.datatables.net/1.10.2/js/jquery.dataTables.min.js"></script>
+
+
+    <style>
+        #g {
+            word-spacing: 20px;
+            width: 200px;
+        }
+
+        #r > th {
+            text-align: center;
+        }
+
+        #myInput {
+            background-image: url("../../images/searcher .png");
+            background-position: 5px 5px;
+            background-repeat: no-repeat;
+            font-size: 16px;
+            padding: 12px 20px 12px 40px;
+            margin: 12px 12px 10px 12px;
+        }
+
+        #r {
+            background-color: black;
+            color: white;
+        }
+    </style>
+</head>
+
+
+
+<div class="container">
+    <div class="row">
+
+        <p> </p><p> </p>
+
+        <div class="col-md-10 col-md-offset-1">
+
+            <div class="panel panel-default panel-table">
+                <div class="panel-heading">
+                    <div class="row">
+                        <div class="col col-xs-6">
+                            <h3 class="panel-title" style="font-size:x-large;     font-weight: bold; font-family:Times New Roman, Times, serif;">Senior Projects</h3>
+                        </div>
+                       
+                    </div>
+                </div>
+                <input class="form-control" id="myInput" onkeyup="myfunction()" type="text" placeholder="Search..">
+
+                <div class="panel-body">
+                    <table id="escalation" class="table table-striped table-bordered table-list">
+                        <thead>
+                            <tr id="r">
+                                <th>Name</th>
+                                <th>Year </th>
+                                <th> </th>
+                            </tr>
+                        </thead>
+                        <tbody id="myTable">
+                            @foreach (var name in Model)
+                            {
+
+                            <tr>
+                                <td>@Html.DisplayFor(modelItem => name.SPName)</td>
+                                <td>@Html.DisplayFor(modelItem => name.Year)</td>
+                                <td align="center" id="g">
+                                    <a href="@Url.Action("Project","AreaOFInterest",new {id=name.SPtId })" class="btn btn-default"><em class="fa fa-eye	"></em></a>
+                                    <a href="@Url.Action("Edit","SeniorProjectt",new {id=name.SPtId})" class="btn btn-default"><em class="fa fa-edit"></em></a>
+
+                                    <a id="deletebtn" href="@Url.Action("Delete","SeniorProjectt",new {id=name.SPtId})" onclick="return Submit(@name.SPtId)" class="btn btn-danger"><em class="fa fa-trash"></em></a>
+                                    @*@Html.ActionLink(
+            "Delete",
+            "AOIAdmin",
+            new { id = name.AOIId },
+            new { onclick = "return confirm('Are you sure you wish to delete this article?');" })*@
+
+
+                                </td>
+                            </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+
+                <div class="panel-footer">
+                    <div class="row">
+                        <div class="col col-xs-4"></div>
+
+
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript">
+
+
+
+        $(document).ready(function () {
+            $("#myInput").on("keyup", function () {
+                var value = $(this).val().toLowerCase();
+                $("#myTable tr").filter(function () {
+                    $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+                });
+            });
+        });
+
+        function Submit() {
+            if (confirm("Are you sure you want to delete the record?")) {
+                return true;
+            } else {
+                return false;
+            }
+        }
+
+
+</script>

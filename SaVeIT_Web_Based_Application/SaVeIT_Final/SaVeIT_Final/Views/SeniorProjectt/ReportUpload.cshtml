@@ -1,0 +1,207 @@
+@model SaVeIT_Final.Models.ProjectValidation
+@{
+    ViewBag.Title = "ReportUpload";
+    Layout = "~/Views/Shared/_Layout3.cshtml";
+}
+
+<style>
+    #remoteValidation td {
+        padding: 10px;
+    }
+    /*Defines the output of the Html.ValidationMessage method when it's displaying an error*/
+    /*.field-validation-error {
+
+        }*/
+    .lab {
+        margin-right: 60px;
+    }
+
+
+    .btn-file {
+        position: relative;
+        overflow: hidden;
+    }
+
+        .btn-file input[type=file] {
+            position: absolute;
+            top: 0;
+            right: 0;
+            min-width: 100%;
+            min-height: 100%;
+            font-size: 100px;
+            text-align: right;
+            filter: alpha(opacity=0);
+            opacity: 0;
+            outline: none;
+            background: white;
+            cursor: inherit;
+            display: block;
+        }
+
+    .progress {
+        position: relative;
+        width: 540px;
+        border: 1px solid #ddd;
+        padding: 1px;
+    }
+
+    .progress-bar {
+        width: 0px;
+        height: 30px;
+    }
+</style>
+<h2>Add Senior Project</h2>
+
+<div class="panel-info">
+    <div class="" style="margin-top:50px;">
+
+
+        @using (Ajax.BeginForm("ReportUpload", "SeniorProjectt", new AjaxOptions()
+
+        {
+            HttpMethod = "post"
+        }, new { enctype = "multipart/form-data", @Id = "Report" }))
+        {
+            @Html.AntiForgeryToken()
+
+            <label style="" class="col-sm-2">Upload Report</label>
+            <div class="col-sm-6" style="margin-left:-50px;">
+
+                <div class="form-group">
+                    <div class="input-group">
+                        <input id='urlname' type="text" class="form-control ful" readonly>
+                        <span class="input-group-btn">
+
+                            <span class="btn btn-default btn-file ">
+                                <span class="glyphicon glyphicon-file"></span>
+                                Browse <input name="file" type="file" required accept="application/pdf" id="imgInp">
+                            </span>
+
+                            <button type="submit" class="btn btn-labeled btn-primary">
+                                <span class="btn-label"><i class="glyphicon glyphicon-upload"></i> </span>Upload
+                            </button>
+                            <span style="color:red;">*only pdf and docx</span>
+                        </span>
+
+                    </div>
+                </div>
+
+
+            </div>
+
+        }
+    </div>
+    <div>
+
+        <div class="col-sm-offset-1 col-sm-offset-5" style="padding-left:40px;">
+            <div class="progress progress-striped active"> <div class="progress-bar"> 0 % </div>   </div>   <div id="status"> </div>
+        </div>
+    </div>
+    <div>
+    </div>
+    @using (Html.BeginForm("InsertProject", "SeniorProjectt", FormMethod.Post))
+    {
+        @Html.AntiForgeryToken()
+        @Html.ValidationSummary(true);
+        <table id="remoteValidation">
+
+            <tr>
+                <td>
+                    @Html.LabelFor(model => model.Section, "Section", new { htmlAttributes = new { @Style = " ", @Class = "" } })
+                </td>
+                <td>
+                    @Html.EditorFor(model => model.Section, new { htmlAttributes = new { @Id = "section", @Class = "form-control " } })
+                </td>
+
+
+                <td>
+                    @Html.LabelFor(model => model.Year, "Year", new { htmlAttributes = new { @Style = "display:inline-block;padding-left:40px;", @Class = "" } })
+                </td>
+                <td>
+                    @Html.EditorFor(model => model.Year, new { htmlAttributes = new { @Id = "year", @class = "form-control", @Value = DateTime.Now.Year } })
+                </td>
+
+            </tr>
+        </table>
+
+        <table>
+            <tr>
+                <td>
+                    <div>
+                        @Html.ValidationMessageFor(model => model.Section, null, new { @Class = "text-danger" })
+                    </div>
+                </td>
+                @Html.ValidationMessageFor(model => model.Year, null, new { htmlAttributes = new { @Class = "text-danger" } })
+
+                <td></td>
+            </tr>
+        </table>
+        <div class="col-sm-offset-8">
+            <button class="btn btn-primary">Submit</button>
+        </div>
+    }
+</div>
+@section scripts {
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+
+            $(document).on('change', '.btn-file :file', function () {
+                var input = $(this),
+                    label = input.val().replace(/\\/g, '/').replace(/.*\//, '');
+                input.trigger('fileselect', [label]);
+            });
+
+            $('.btn-file :file').on('fileselect', function (event, label) {
+
+                var input = $(this).parents('.input-group').find(':text'),
+                    log = label;
+
+                if (input.length) {
+                    input.val(log);
+                } else {
+                    if (log) alert(log);
+                }
+
+            });
+
+
+
+        });
+    </script>
+
+
+    <script src="http://malsup.github.com/jquery.form.js"></script>
+    <script>
+        (function () {
+            var bar = $('.progress-bar');
+            var percent = $('.progress-bar');
+            var status = $('#status');
+            $("form[id='Report']").ajaxForm({
+                beforeSend: function () {
+                    status.empty();
+                    var percentValue = '0%';
+                    bar.width(percentValue);
+                    percent.html(percentValue);
+                },
+                uploadProgress: function (event, position, total, percentComplete) {
+                    var percentValue = percentComplete + '%';
+                    bar.width(percentValue);
+                    percent.html(percentValue);
+                },
+                success: function (d) {
+                    var percentValue = '100%';
+                    bar.width(percentValue);
+                    percent.html(percentValue);
+                    //  $('.fu1').val('');
+                    alert(d);
+                },
+                complete: function (xhr) {
+                    // status.html(xhr.responseText);
+                }
+            });
+        })();
+    </script>
+    <script src="~/Scripts/jquery.validate.min.js"></script>
+    <script src="~/Scripts/jquery.validate.unobtrusive.js"></script>
+}

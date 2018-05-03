@@ -1,0 +1,67 @@
+﻿@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout3.cshtml";
+}
+
+<style>
+    .box {
+        width: 550px;
+        box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+        text-align: left;
+        margin-left: 30px;
+        margin-bottom: 60px;
+        font-family: 'Times New Roman';
+        font-size: 13pt;
+        color: gray;
+        display: block;
+        height: 400px;
+        padding-left: 20px;
+    }
+
+    #myImg {
+        border-radius: 5px;
+        cursor: pointer;
+        transition: 0.3s;
+    }
+
+        #myImg:hover {
+            opacity: 0.7;
+        }
+</style>
+
+
+<h1>Statistics</h1>
+<div class="container body-content">
+    <h2>This different statics on senior projects of IT department in KAU:</h2>
+    <div class="box" style="margin-top:40px;">
+        <div>
+            <p>  <br />   Word cloud from abstract of all senior project from 2014 to 2018.</p>
+        </div>  <!--width:64%-->
+        <img id="myImg" src="~/Content/html/WordCloud.jpeg" alt="WordCloud" style="width:500px; height:330px;">
+
+    </div>
+
+    <div class="box">
+        <div>
+            <p>  <br />   Trends of the most areas the senior students worked on from 2014 to 2018.</p>
+        </div>
+        <img id="myImg" src="~/Content/html/WordFrequencyAOI.png" alt="WordFrequencyAOI" style="width:500px; height:300px;">
+    </div>
+
+    <div class="box" style=" margin-left:30px;">
+        <div>
+            <p>  <br />   Trends of the most programming langueges the senior students worked on <br> from 2014 to 2018.</p>
+        </div>
+        <img id="myImg" src="~/Content/html/PL_Trend.png" alt="TrendsOfAOI" style="width:500px; height:300px;">
+
+    </div>
+    <div class="box" style="  margin-left:30px;">
+        <div>
+            <p>  <br /> Show the relation between the area of interest.</p>
+        </div>
+        <img id="myImg" src="~/Content/html/Network.jpeg" alt="TrendsOfAOI" style="width:500px; height:300px;">
+
+    </div>
+
+
+

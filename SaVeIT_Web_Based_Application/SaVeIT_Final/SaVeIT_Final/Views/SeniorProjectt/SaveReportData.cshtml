@@ -1,0 +1,506 @@
+﻿@model SaVeIT_Final.ViewModel.ProjectVM
+@{
+    ViewBag.Title = "SaveReportData";
+    Layout = "~/Views/Shared/_Layout3.cshtml";
+
+}
+<link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
+<link href="~/Content/ReportPagesStyleSheet.css" rel="stylesheet" />
+
+<h2>Add Senior Project</h2>
+
+
+
+@Html.AntiForgeryToken()
+@Html.HiddenFor(model => model.SPtId)
+@Html.ValidationSummary(string.Empty, new { @class = "alert alert-danger" })
+<br>
+
+<div id="wizard">
+    <p><strong>Please fill tabs by order</strong></p>
+
+    <ul class="nav nav-tabs" role="tablist" id="navigation">
+        <li role="presentation" class="active selected">
+            <a href="#reportSummary" role="tab" data-toggle="tab">Report Summary</a>
+        </li>
+        <li role="presentation">
+            <a href="#supervisorInfo" role="tab" data-toggle="tab">Supervisor Information</a>
+        </li>
+        <li role="presentation">
+            <a href="#studentsInfo" role="tab" data-toggle="tab" style="font:bold">Students Information</a>
+        </li>
+
+
+        <li class="float-right">
+
+        </li>
+    </ul>
+    <div class="tab-content">
+        <div role="tabpanel" class="tab-pane active" id="reportSummary">
+
+            <!--8888888888888888888888888888888888888888888888888888888888888888888-->
+            <!--8888888888888888888888888888888888888888888888888888888888888888888888-->
+            <form id="ReportForm">
+                @Html.HiddenFor(model => model.SPtId)
+
+                <button type="submit" class="btn btn-primary" style="float:right" id="saveReport">Save</button>
+                <table id="reportForm">
+
+                    <tr>
+                        <td>
+                            @Html.LabelFor(model => model.SPName, "Title", new { @style = "display:inline-block" })
+                            @Html.EditorFor(model => model.SPName, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.SPName, "*", new { @Class = "text-danger" })
+                        </td>
+                        <td>
+                            @Html.LabelFor(model => model.SPVideos, "Youtube link", new { @style = "display:inline-block" })
+                            @Html.EditorFor(model => model.SPVideos, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.SPVideos, ".", new { @Class = "", @Style = "color:white;" })
+                        </td>
+                        <td>
+                            @Html.LabelFor(model => model.SPGrade, "Grade", new { @style = "display:inline-block" })
+                            @Html.EditorFor(model => model.SPGrade, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.SPGrade, ".", new { @Class = "", @Style = "color:white;" })
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td></td>
+                    </tr>
+                </table>
+
+
+                <label>Abstract</label><span style="color:red">    *</span>
+                <textarea class="form-control" rows="6" name="SPAbstract" required>@Model.SPAbstract</textarea>
+
+
+                <table>
+                    <!--Area of interest-->
+                    <tr>
+
+                        <td></td>
+                    </tr>
+                    <tr id="AOIFields">
+                        <td>
+                            <div class="col-xs-9">
+
+                                <label>Area of interest</label>
+                            </div>
+                            <div class="col-xs-3">
+
+                                <input type="button" value="+" id="addAOI" class="btn btn-primary">
+                            </div>
+                        </td>
+                        <td>
+                            <input type="hidden" name="AOIList.Index" value="123" style="display:none" />
+
+                            <input type="text" class="form-control AOI" name="AOIList[123]" />
+                        </td>
+                    </tr>
+
+
+                    <!--Programming languages-->
+
+
+                    <tr id="PLFields">
+                        <td>
+                            <div class="col-xs-9">
+
+                                <label>Programming languages</label>
+                            </div>
+                            <div class="col-xs-3">
+
+                                <input type="button" value="+" id="addPL" class="btn btn-primary">
+                            </div>
+
+                        </td>
+                        <td>
+                            <input type="hidden" name="PLList.Index" value="123" style="display:none" />
+
+                            <input type="text" class="form-control PL" name="PLList[123]" />
+                        </td>
+                    </tr>
+
+                    <tr id="Awards">
+                        <td>
+                            <div class="col-xs-9">
+                                <label>Awards</label>
+                            </div>
+                            <div class=" col-xs-3">
+                                <input type="button" value="+" id="addAward" class="btn btn-primary ">
+                            </div>
+                        </td>
+                        <td>
+                            <input type="hidden" name="AwardsList.Index" value="123" style="display:none;" />
+
+                            <input type="text" class="form-control Award" name="AwardsList[123]" />
+                        </td>
+                    </tr>
+                </table>
+
+            </form>
+            <div class="alert alert-info fade in">
+                <a href="#" class="close" data-dismiss="alert">&times;</a>
+                <strong>Note!</strong> <p>
+                    Extract abstract from the report it will be correct only if
+                    :
+                </p> <ul>
+                    <li>Abstract in the first 10 pages and it before table of contents</li>
+                </ul>
+            </div>
+
+        </div>
+        <!--*********************************************************************************************-->
+        <div role="tabpanel" class="tab-pane " id="supervisorInfo">
+            <!--Auto complete for supervisors-->
+
+            <form id="supForm">
+                @Html.HiddenFor(model => model.SPtId)
+                <button class="btn btn-primary" style="float:right" id="supButton">Save</button>
+
+                <label style="display:inline-block">Search</label>
+                <input type="text" id="SUP" class="form-control col-sm-3" placeholder="find supervisor id by his name" />
+
+                <table>
+                    <tr>
+                        <td>
+                            <label style="display:inline-block">Supervisor</label>
+                            @Html.TextBoxFor(model => model.supervisor.userName, null, new { @class = "form-control" })
+                            @*<span style="color:red">*</span>*@
+                        </td>
+                        <td>
+                            <label style="display:inline-block">Supervisor ID</label>
+                            @Html.TextBoxFor(model => model.supervisor.userId, null, new { @class = "form-control", @required = "required" })
+                            <span style="color:red">*</span>
+                        </td>
+                    </tr>
+                </table>
+            </form>
+        </div>
+        <!--**************************************************************************************************-->
+
+
+        <div role="tabpanel" class="tab-pane" id="studentsInfo">
+            <form id="StuForm">
+                @Html.HiddenFor(m => m.SPtId)
+                <button class="float-right btn btn-primary" id="stuSubmit" style="float:right">Save</button>
+                <table>
+                    <tr>
+                        <td>
+                            <label>Student name</label>
+                        </td>
+                        <td>
+                            <label>ID</label>
+                        </td>
+                        <td>
+                            <label>Email</label>
+                        </td>
+                        <td>
+                            <button type="button" id="add" class="btn btn-success submit">+</button>
+                        </td>
+                    <tbody id="students">
+                        @for (int i = 0; i < Model.Users.Count; i++)
+                        {
+                            <tr>
+                                <td>
+                                    <input type="hidden" name="Users.Index" value="@i" />
+                                    @Html.EditorFor(model => model.Users[i].userName, new
+                                    {
+                                        htmlAttributes = new { @class = "form-control student studentRow " }
+                                    })
+                                    @Html.ValidationMessageFor(model => model.Users[i].userName, "*", new { @Class = "text-danger" })
+                                </td>
+                                <td>
+                                    @Html.EditorFor(model => model.Users[i].userId, new { htmlAttributes = new { @class = " studentRow form-control" } })
+                                    @Html.ValidationMessageFor(model => model.Users[i].userId, "*", new { @Class = "text-danger" })
+
+                                </td>
+                                <td>
+                                    @Html.EditorFor(model => model.Users[i].userEmail, new { htmlAttributes = new { @class = "studentRow form-control" } })
+                                    @Html.ValidationMessageFor(model => model.Users[i].userEmail, "*", new { @Class = "text-danger" })
+
+                                </td>
+
+
+                                <td>
+                                    <input type="button" value="-" class="btn btn-danger delete" style="margin-left:10px;">
+
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+
+            </form>
+
+            <table id="template" style="display:none">
+                <tr>
+                    <td>
+                        <input type="hidden" name="Users.Index" value="#">
+                        <input data-val="true" class="form-control valid studentRow" data-val-required="Please enter a name" name="Users[#].userName" type="text" value="">
+                        <span class="field-validation-valid" data-valmsg-for="Users[#].userName" data-valmsg-replace="true"></span>
+                    </td>
+                    <td>
+                        <input data-val="true" class="form-control studentRow" data-val-required="Please enter an Id" name="Users[#].userId" type="text">
+                        <span class="field-validation-valid" data-valmsg-for="Users[#].userId" data-valmsg-replace="true"></span>
+                    </td>
+                    <td>
+                        <input data-val="true" class="studentRow form-control" data-val-email="The Email field is not a valid e-mail address." data-val-required="Please enter an email address" name="Users[#].userEmail" type="text" value="">
+                        <span class="field-validation-valid" data-valmsg-for="Users[#].userEmail" data-valmsg-replace="true"></span>
+                    </td>
+                    <td>
+                        <button type="button" class="delete btn btn-danger" style="margin-left:10px;">-</button>
+
+                    </td>
+                </tr>
+            </table>
+
+
+
+            <div class="alert alert-info fade in">
+                <a href="#" class="close" data-dismiss="alert">&times;</a>
+                <strong>Note!</strong> <p>
+                    Extract students information from the report will be correct only if
+                    :
+                </p> <ul><li>They in the first page</li><li> Each student information in one new line </li><li>preceded by the word (by or by: or by :)</li></ul>
+            </div>
+        </div>
+
+    </div>
+
+</div>
+
+<div>
+    @Html.ActionLink("Back to upload report", "ReportUpload")
+</div>
+
+@section scripts{
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+    <script src="//code.jquery.com/jquery-1.10.2.js"></script>
+    <script src="//code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+       /*************CALLING AUTO COMPELETE Functions**********************/
+            AOIAutoComplete($(document));
+            PLAutoComplete($(document));
+            SUPAutoComplete($(document));
+
+        })
+        /********************For add/delete/submit in student form***************************************************/
+        var form = $('#StuForm');
+			var students = $('#students');
+        	var template = $('#template');
+
+        $('#students').on('click', '.delete', function () {
+            //Check if student row exists or not
+            var studentsRow = $('.studentRow');
+            if (studentsRow.length==  6) {
+                alert("Each project required at least one student");
+            }
+            else {
+                $(this).closest('tr').remove();
+            }
+            });
+
+        	$('#add').click(function () {
+            	var index = (new Date()).getTime();
+            	var clone = template.clone();
+            	clone.html($(clone).html().replace(/#/g, index));
+            	var row = clone.find('tr');
+				students.append(row);
+			row.find('input').eq(1).focus();
+            	form.data('validator', null);
+            	$.validator.unobtrusive.parse(form);
+        	});
+
+
+        $('#StuForm').submit(function (event) {
+            event.preventDefault();
+
+            var studentsRow = $('.studentRow');
+            if (studentsRow.length == 3) {
+                alert("Please add students, each project required at least one student");
+            }
+            else {
+
+                event.preventDefault();
+            var data = $(this).serialize();
+                // check if the input is valid
+                if (!$(this).valid()) return false;
+                $.ajax({
+
+                url: '@Url.Action("AddStudents", "SeniorProjectt")',
+                type: 'POST',
+                cache: false,
+                data: data,
+                success: function (result) {
+                    alert(result);
+                    if (result == "Students has been added successfully") {
+                        $("#stuSubmit").attr("disabled", true);
+
+                    }
+                }
+            });
+        }
+        	});
+
+        $("#ReportForm").submit(function (event) {
+
+            var data = $('#ReportForm').serialize();
+
+                event.preventDefault();
+            // check if the input is valid
+            if (!$(this).valid()) return false
+
+                $.ajax({
+                    url: '@Url.Action("SaveReport", "SeniorProjectt")',
+                    type: 'POST',
+                    cache: false,
+                    data: data,
+                    success: function (result) {
+                        alert(result);
+                        if (result == "Saved successfully") {
+                           $("#saveReport").attr("disabled", true);
+
+                        }
+                    }
+
+                });
+        });
+/*********************************************************************************************/
+        $("#supForm").submit(function (event) {
+
+
+            var data = $('#supForm').serialize();
+
+                event.preventDefault();
+            // check if the input is valid
+            if (!$(this).valid()) return false
+                $.ajax({
+                    url: '@Url.Action("AddSupervisortoProject", "SeniorProjectt")',
+                    type: 'POST',
+                    cache: false,
+                    data: data,
+                    success: function (result) {
+                        //   $("#response").text(result);
+                        alert(result);
+                        if (result == "Saved successfully") {
+                            $("#supButton").attr("disabled", true);
+
+                        }
+                    }
+
+                })
+            ;
+        });
+
+        /****************************************************************************************/
+       /*************Function for AUTO COMPELETE SEARCH FOR AREA OF INTEREST FIELDS**********************/
+        function AOIAutoComplete($parent) {
+            $parent.find(".AOI").autocomplete({
+                source: function (request, response) {
+                    $.ajax({
+                        url: "/SeniorProjectt/SearchAOI",
+                        type: "POST",
+                        dataType: "json",
+                        data: {
+                            Prefix: request.term
+                        },
+                        success: function (data) {
+                            response($.map(data, function (item) {
+                                return {
+                                    label: item.AOIName,
+                                    value: item.AOIName
+                                };
+                            }));
+                        }
+                    })
+                },
+                messages: {
+                    noResults: '',
+                    results: function (resultsCount) { }
+                }
+            });
+        }
+        /*************Function for AUTO COMPELETE SEARCH FOR AREA OF INTEREST FIELDS**********************/
+        function SUPAutoComplete($parent) {
+            $parent.find("#SUP").autocomplete({
+                source: function (request, response) {
+                    $.ajax({
+                        url: "/SeniorProjectt/SearchSupervisors",
+                        type: "POST",
+                        dataType: "json",
+                        data: {
+                            Prefix: request.term
+                        },
+                        success: function (data) {
+                            response($.map(data, function (item) {
+                                return {
+                                    label: item.Info,
+                                    value: item.Info
+                                };
+                            }));
+                        }
+                    })
+                },
+                messages: {
+                    noResults: '',
+                    results: function (resultsCount) { }
+                }
+            });
+        }
+       /*************Function for AUTO COMPELETE SEARCH FOR PL FIELDS**********************/
+        var availableProgrammingLanguages = [
+            "php",
+            "java",
+            "visual basic",
+            "c",
+            "c++",
+            "c#",
+            "fortran",
+            "groovy",
+            "perl",
+            "python",
+            "ruby",
+            "scala",
+            "r",
+        ];
+        function PLAutoComplete($parent) {
+            $parent.find(".PL").autocomplete({
+                source: availableProgrammingLanguages
+            });
+        }
+        /****************ADD NEW AREA OF INTEREST FIELDS**************************************/
+        var areaIndex = "b";
+        $("#addAOI").click(function () {
+            //create the elements representing the new object, giving them a fake indexer
+            areaIndex = areaIndex + "b";
+            var $html = $("<td><input type='hidden' name='AOIList.Index' value='" + areaIndex + "' style='display:none;' /> <input type='text' class='form-control AOI' name='AOIList[" + areaIndex + "]' /></td>").appendTo('#AOIFields');
+
+            AOIAutoComplete($html);
+        })
+        /****************ADD NEW Programming Languages FIELDS**************************************/
+        var PLIndex = "c";
+        $("#addPL").click(function () {
+            //create the elements representing the new object, giving them a fake indexer
+            PLIndex = PLIndex + "b";
+            var $html = $("<td><input type='hidden' name='PLList.Index' value='" + PLIndex + "' style='display:none;' /> <input type='text' class='form-control PL' name='PLList[" + PLIndex + "]' /></td>").appendTo('#PLFields');
+
+            PLAutoComplete($html);
+        })
+        /****************ADD NEW Award FIELDS**************************************/
+        var AwardIndex = "d";
+        $("#addAward").click(function () {
+            //create the elements representing the new object, giving them a fake indexer
+            AwardIndex = AwardIndex + "b";
+            var $html = $("<td><input type='hidden' name='AwardsList.Index' value='" + AwardIndex + "' style='display:none;' /> <input type='text' class='form-control Award' name='AwardsList[" + AwardIndex + "]' /></td>").appendTo('#Awards');
+
+        })
+
+    </script>
+
+    <script src="~/Scripts/jquery.validate.min.js"></script>
+    <script src="~/Scripts/jquery.validate.unobtrusive.js"></script>
+}

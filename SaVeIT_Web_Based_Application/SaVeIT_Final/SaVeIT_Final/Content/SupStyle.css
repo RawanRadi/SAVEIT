@@ -1,0 +1,39 @@
+﻿@model IEnumerable<WebApplication3.Models.Supervisors> @ {
+    ViewBag .Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<link rel="stylesheet" href="~/Content/filecs.css" / > <script src="~/Scripts/SupScript.js" > </script > <style > .pagination-nav {
+    margin: 30px 0 20px 0;
+}
+
+.pagination-nav ul {
+    margin: 0;
+    padding: 0;
+}
+
+    .pagination-nav ul li {
+        display: inline-block;
+        margin: 3px;
+        padding: 6px 10px;
+        background: #FFF;
+        color: black;
+        border-radius: 2px;
+    }
+
+        .pagination-nav ul li.active:hover {
+            cursor: pointer;
+            background: black;
+            color: white;
+        }
+
+        .pagination-nav ul li.inactive {
+            background: #e8e8e8;
+        }
+
+        .pagination-nav ul li.selected {
+            background: black;
+            color: white;
+        }
+
+</style > <h2 > Supervisors</h2 > <div class="products-view-all" > <form class="post-list" > <input type="hidden" value="" > </form > <div class="clearfix" > <article class="navbar-form navbar-left p-0 m-0 ml-b" > <label > Search <input type="text" placeholder="Enter a keyword" class="form-control post_search_text m-b" > </label > <div class="form-group" > <label > Search by </label > <select class="form-control post_SB m-b " onchange="send(this);" > <option value="name" > Name</option > <option value="Area" > Area of interest</option > </select > </div > <div class="form-group" > <label > Per Page: </label > <select class="form-control post_max m-b" > <option value="6" > 6</option > <option value="12" > 12</option > <option value="18" > 18</option > </select > </div > <input type="submit" value="Apply" class="btn  post_search_submit m-b" > </article > </div > <hr > <div class="clearfix" > <div class="pagination-container clearfix" > <br class="clear" > </div > <div class="pagination-nav" > </div > </div > </div >

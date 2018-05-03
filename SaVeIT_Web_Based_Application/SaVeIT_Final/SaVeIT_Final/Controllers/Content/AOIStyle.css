@@ -1,0 +1,27 @@
+﻿
+.box {
+    width: 190px;
+    // max-height: 220px;
+    border: 1px solid grey;
+    border-radius: 5px;
+    background-color: rgba(245, 236, 236, 0.20);
+    padding: 25px;
+    margin: 40px;
+    text-align: center;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    display: inline-block;
+    font-weight: bold;
+}
+
+    .box:hover {
+        box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    }
+
+button {
+    background-color: black;
+    color: white;
+}
+
+    button:hover {
+        background-color: dimgrey;
+    }

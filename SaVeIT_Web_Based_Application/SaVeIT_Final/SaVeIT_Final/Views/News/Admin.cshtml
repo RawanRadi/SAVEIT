@@ -1,0 +1,31 @@
+﻿@model IEnumerable<SaVeIT_Final.Models.News>
+
+@{
+    ViewBag.Title = "Admin";
+    Layout = "~/Views/Shared/_Layout3.cshtml";
+}
+
+<div class="container well col-xs-8 col-sm-8 col-md-8"
+     style="background-color:white; padding:50px; padding-top:10px; margin-top:80px;">
+    <h2 >News</h2>
+    <div style="display:inline-block;">
+        @Html.ActionLink("Create News", "Create", "News")
+    </div>
+    <div class="panel-group" style="padding-top:15px;">
+        <div class="panel panel-default" style="padding-bottom:8px; color:black;">
+            @foreach (var item in Model)
+            {
+                <div class="panel-heading">
+                    <h4 style="margin-left:180px;">@Html.DisplayFor(modelItem => item.newName)</h4>
+                </div>
+                <div class="panel-body" style="text-align:center;">
+                    <div style="color:white; margin-left:30px; display:inline-block;" >
+                        @Html.ActionLink("Edit", "Edit", new { id = item.newId }) |
+                        @Html.ActionLink("Delete", "Delete", new { id = item.newId })
+                    </div>
+                </div>
+                <hr>
+            }
+        </div>
+    </div>
+</div>

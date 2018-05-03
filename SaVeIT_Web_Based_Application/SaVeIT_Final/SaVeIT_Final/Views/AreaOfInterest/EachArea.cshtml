@@ -1,0 +1,91 @@
+﻿
+@model PagedList.IPagedList<SaVeIT_Final.Models.SeniorProject>
+
+@using PagedList.Mvc;
+
+@{
+    ViewBag.Title = "EachArea";
+    Layout = "~/Views/Shared/_Layout3.cshtml";
+}
+@Styles.Render("~/Content/EachAreaStyle.css")
+<h2> @ViewBag.AName</h2>
+<div class="container">
+    <div class="row">
+        <!--Start first project pannel-->
+        @using (Html.BeginForm("EachArea", "AreaOfInterest", FormMethod.Get))
+        {
+            <div class="clearfix">
+                <article class="navbar-form navbar-left p-0 m-0 ml-b">
+                    <div class="input-group">
+
+                        @Html.DropDownList("Searchby", new List<SelectListItem>{
+            new SelectListItem {Text="Title" , Value="1"}
+            ,new SelectListItem {Text="Year" , Value="2"}
+            ,new SelectListItem {Text="Programming Language" , Value="3"}
+
+}, "search by", new { @class = "form-control mb" })
+                        <!-- insert this line to make the textbox and select menu in the same line-->
+                        <span class="input-group-addon" style="width:0px; padding-left:0px; padding-right:0px; border:none;"></span>
+                        @Html.TextBox("Search_Data", ViewBag.FilterValue as string, new { @class = "form-control m-b" })
+
+                        <span id="Required" class="input-group-addon" style="bottom: 50px;width:0px; padding-left:0px; padding-right:0px; border:none;  background-color:white; ">
+                        </span>
+                        <span class="input-group-btn">
+                            <input type="submit" value="Search" class="btn btn-default">
+                        </span>
+                    </div>
+
+
+
+
+
+                    <div class="form-group" style="padding-left:10px;">
+                        <label>Order By: </label>
+
+                        @Html.ActionLink("Name", "EachArea", new { Sorting_Order = ViewBag.SortingName, Filter_Value = ViewBag.FilterValue })
+
+                        @Html.ActionLink("Year", "EachArea", new { Sorting_Order = ViewBag.SortingDate, Filter_Value = ViewBag.FilterValue })
+
+                    </div>
+                </article>
+            </div>
+
+
+
+        }
+
+        <hr>
+        <div class="contaner">
+            @foreach (var name in Model)
+            {
+
+                <div class="panel panel-default text-center">
+
+                    <!--pannel heading img and text-->
+                    <div class="panel-heading media" style="background-color:#183F66;color:white">
+                        <!--media classs to force img and text and be in the same line-->
+                        <div class="media">
+                            <!--media-left classs to force img to be in the left of text-->
+
+                            <div class="media-body">
+                                <p class="media-heading"><strong> @Html.DisplayFor(modelItem => name.SPName)</strong> </p>
+                            </div>
+                        </div>
+                    </div>
+                    <!--pannel body for show project info-->
+                    <ul class="list-group">
+                        <li class="list-group-item " style="">Programming Languages: </li>
+                        <li class="list-group-item" style="">Supervisor: @Html.DisplayFor(modelItem => name.User.userName)</li>
+                        <li class="list-group-item" style="">Year: @Html.DisplayFor(modelItem => name.Year)</li>
+                        <li class="list-group-item" style=""><a href="@Url.Action("Project","AreaOfInterest",new { id = name.SPtId })" class="btn btn-default" style="background-color:#183F66 ;color:white ">In Details</a></li>
+                    </ul>
+                </div>
+            }
+
+        </div>
+        <!--End project pannel-->
+    </div>
+</div>
+    Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.PageCount
+    @Html.PagedListPager(Model, Page_No => Url.Action("EachArea",
+                new { Page_No, Sorting_Order = ViewBag.CurrentSortOrder, Filter_Value = ViewBag.FilterValue }))

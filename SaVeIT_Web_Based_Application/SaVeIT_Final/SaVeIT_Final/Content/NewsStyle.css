@@ -1,0 +1,16 @@
+﻿body {
+}
+.fit {
+    width: fit-content;
+    /* To adjust the height as well */
+    height: fit-content;
+}
+
+#Topspace {
+    margin-top: 50px;
+}
+
+.fit.well {
+    padding: 0;
+    max-width: 50px;
+}

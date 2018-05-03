@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="5089baac4392482d8cd65ecfa15e6571" Name="Diagram1">
+        <EntityTypeShape EntityType="SaVeITModel.AreaOFInterest" Width="1.5" PointX="11.25" PointY="1.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="SaVeITModel.Award" Width="1.5" PointX="0.75" PointY="7.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="SaVeITModel.News" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="SaVeITModel.ProjectAward" Width="1.5" PointX="3" PointY="7.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="SaVeITModel.ProjectsAOI" Width="1.5" PointX="8.25" PointY="7.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="SaVeITModel.SeniorProject" Width="1.5" PointX="6" PointY="6.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="SaVeITModel.Stu_Projects" Width="1.5" PointX="10.5" PointY="9.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="SaVeITModel.Student" Width="1.5" PointX="8.25" PointY="13.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="SaVeITModel.SupAOI" Width="1.5" PointX="13.5" PointY="5.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="SaVeITModel.SupervisorRole" Width="1.5" PointX="1.5" PointY="4.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="SaVeITModel.Supervisor" Width="1.5" PointX="3.75" PointY="4.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="SaVeITModel.UserRole" Width="1.5" PointX="9" PointY="4.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="SaVeITModel.User" Width="1.5" PointX="11.25" PointY="5.25" IsExpanded="true" />
+        <AssociationConnector Association="SaVeITModel.FK__ProjectsA__AOIId__2DB1C7EE" ManuallyRouted="false" />
+        <AssociationConnector Association="SaVeITModel.FK_AOI_AreaOfInterest" ManuallyRouted="false" />
+        <AssociationConnector Association="SaVeITModel.FK__ProjectAw__Award__68D28DBC" ManuallyRouted="false" />
+        <AssociationConnector Association="SaVeITModel.FK_SeniorProject_Award" ManuallyRouted="false" />
+        <AssociationConnector Association="SaVeITModel.FK__ProjectAw__Proje__24E777C3" ManuallyRouted="false" />
+        <AssociationConnector Association="SaVeITModel.FK__ProjectsA__SPtId__220B0B18" ManuallyRouted="false" />
+        <AssociationConnector Association="SaVeITModel.FK__Stu_Project__PId__22FF2F51" ManuallyRouted="false" />
+        <AssociationConnector Association="SaVeITModel.FK_SeniorProject_Supervisors" ManuallyRouted="false" />
+        <AssociationConnector Association="SaVeITModel.FK_SeniorProject_SupervisorUser" ManuallyRouted="false" />
+        <AssociationConnector Association="SaVeITModel.FK_Student_SeniorProject" ManuallyRouted="false" />
+        <AssociationConnector Association="SaVeITModel.FK_Users_ToSP" ManuallyRouted="false" />
+        <AssociationConnector Association="SaVeITModel.FK__Stu_Proje__StuId__214BF109" ManuallyRouted="false" />
+        <AssociationConnector Association="SaVeITModel.FK_AOI_Supervisors" ManuallyRouted="false" />
+        <AssociationConnector Association="SaVeITModel.FK_Test_Supervisors" ManuallyRouted="false" />
+        <AssociationConnector Association="SaVeITModel.FK_Supervisors_SupervisorRole" ManuallyRouted="false" />
+        <AssociationConnector Association="SaVeITModel.FK_Users_UserRole" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

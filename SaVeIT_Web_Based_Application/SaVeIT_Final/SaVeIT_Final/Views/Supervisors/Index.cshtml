@@ -1,0 +1,60 @@
+﻿@model IEnumerable<SaVeIT_Final.Models.User>
+
+@{
+    ViewBag.Title = "Supervisors";
+    Layout = "~/Views/Shared/_Layout3.cshtml";
+}
+<link rel="stylesheet" href="~/Content/filecs.css" />
+<script src="~/Scripts/SupScript.js"></script>
+<link href="~/Content/SupStyle.css" rel="stylesheet" />
+
+<style>
+    .wrap {
+        display: inline-flex;
+        margin-left: 20px;
+    }
+
+    label {
+        display: inline;
+    }
+</style>
+<h2>Supervisors</h2>
+<br>
+<div class="Supervisors-view-all">
+    <form class="post-list">
+        <input type="hidden" value="">
+    </form>
+    <div class="clearfix">
+        <article class="navbar-form navbar-left p-0 m-0 ml-b">
+            <div class="input-group col-sm-offset-2" style="display:inline-flex;">
+
+                <input type="text" placeholder="Enter a keyword" class="form-control post_search_text">
+                <!-- insert this line to make the textbox and select menu in the same line-->
+                <span class="input-group-addon" style="margin-left:10px; margin-right:5px; width:0px; padding-left:0px; padding-right:5px; border:none;"></span>
+                <select class="form-control post_SB m-b ">
+                    <!--hidden to remove it from menu, -->
+                    <option value="name">Name</option>
+                    <option value="Area">Area of interest</option>
+                </select>
+                <span id="Required" class="input-group-addon" style="bottom: 50px;width:0px; padding-left:0px; padding-right:0px; border:none;margin-left:5px;  background-color:white; left:0px ">
+                </span>
+
+                <div class="wrap">
+                    <label for="page" style="width:30px; color:black; display:inline;">Per page . </label>
+                    <select class="form-control post_max m-b" name="page" style="margin-left:25px;">
+                        <option value="6">6</option>
+                        <option value="12">12</option>
+                        <option value="18">18</option>
+                    </select>
+                    <input type="submit" value="Apply" class="btn  post_search_submit m-b" style="margin-left:25px; width:65px; height:60px;">
+
+                </div>
+            </div>
+        </article>
+    </div>
+    <hr>
+    <div class="clearfix">
+        <div class="pagination-container clearfix"><br class="clear"></div>
+        <div class="pagination-nav"></div>
+    </div>
+</div>

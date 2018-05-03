@@ -1,0 +1,175 @@
+﻿@using SaVeIT_Final.Models;
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title - SaVeIT Application</title>
+    @Styles.Render("~/Content/css")
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+
+    <link rel="stylesheet" href="https://cdn.rawgit.com/mladenplavsic/bootstrap-navbar-sidebar/3bd282bd/docs/navbar-fixed-left.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+    <!--<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">-->
+
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <style>
+        .welcome {
+            position: fixed;
+            right: 1px;
+            top: 5px;
+            column-count: 2;
+        }
+
+        #menuleft {
+            box-shadow: 0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23);
+            z-index:6;
+            background-color:white;
+        }
+
+        #menutop {
+            height: 20px;
+            margin-bottom: 50px;
+            z-index:5;
+            margin-left: 230px;
+            background-color:white;
+        }
+
+        li img {
+            margin: 30px 3px 15px 10px;
+        }
+
+        #item {
+            /*width: auto;
+                style="width:232px;"
+            */
+            text-align: center;
+            font-weight: bold;
+            font-size: 18px;
+            font-family: "Times New Roman", Times, serif;
+            height: 73px;
+            border-bottom: 1px solid black;
+        }
+
+            #item:hover {
+                background-color: #555;
+                color: white;
+            }
+
+       
+        #nav {
+            padding-right: 0px;
+            width: 70px;
+            height: 120px;
+        }
+    </style>
+</head>
+
+<body style="background-color:#FAFAFA;">
+    <div class="container">
+        <!-- navbar-left -->
+        <nav id="menuleft" class="navbar navbar-default navbar-fixed-left">
+            <div class="container-fluid">
+                <div class="container">
+                    <div id="navbar" class="navbar-collapse collapse">
+                        <ul class="nav navbar-nav" style="color:white">
+                            @if (HttpContext.Current.Session["UserID"] != null)
+    {
+        String uId = (String)Session["UserID"];
+        Entities db = new Entities();
+        var role = (from r in db.Users
+                    where r.userId == uId
+                    select r.userRole).Single();
+        if (role == 1)
+        {
+                        <li class="logo"><img src="~/images/logo.png" alt="logo" /></li>
+                        <li><a class="nav-link" id="item" href="@Url.Action("Index","Home")">Home</a></li>
+                        <li><a class="nav-link" id="item" href="@Url.Action("Admin","News")">News</a></li>
+                        <li><a class="nav-link" id="item" href="@Url.Action("Admin","Supervisors")">Supervisor</a></li>
+                        <li><a class="nav-link" id="item" href="@Url.Action("AOIAdmin","AreaOfInterest")">Areas of Interest</a></li>
+                        <li><a class="nav-link" id="item" href="@Url.Action("Projects","SeniorProjectt")">Senior Project</a></li>
+                        <li><a class="nav-link" id="item" href="@Url.Action("Index","Statistics")">Statistics</a></li>
+                        <li><a class="nav-link" id="item" href="@Url.Action("About","Home")">About</a></li>
+}
+else
+{
+                        <li class="logo"><img src="~/images/logo.png" alt="logo" /></li>
+                        <li><a class="nav-link" id="item" href="@Url.Action("Index","Home")">Home</a></li>
+                        <li><a class="nav-link" id="item" href="@Url.Action("Index","News")">News</a></li>
+                        <li><a class="nav-link" id="item" href="@Url.Action("Index","Supervisors")">Supervisors</a></li>
+                        <li><a class="nav-link" id="item" href="@Url.Action("Index","AreaOfInterest")">Senior Projects</a></li>
+                        <li><a class="nav-link" id="item" href="@Url.Action("Index","Statistics")">Statistics</a></li>
+                        <li><a class="nav-link" id="item" href="@Url.Action("About","Home")">About</a></li>
+}
+}
+else
+{
+                        <li class="logo"><img src="~/images/logo.png" alt="logo" /></li>
+                        <li><a class="nav-link" id="item" href="@Url.Action("Index","Home")">Home</a></li>
+                        <li><a class="nav-link" id="item" href="@Url.Action("Index","News")">News</a></li>
+                        <li><a class="nav-link" id="item" href="@Url.Action("Index","AreaOfInterest")">SeniorProject</a></li>
+                        <li><a class="nav-link" id="item" href="@Url.Action("Index","Statistics")">Statistics</a></li>
+                        <li><a class="nav-link" id="item" href="@Url.Action("About","Home")">About</a></li>
+}
+
+
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </nav>
+        <!--End first nav-->
+        <!-- nav-top class=" navbar-inverse navbar fixed-top navbar-toggleable-md navbar-expand-lg scrolling-navbar double-nav"-->
+        <nav id="menutop" class="navbar navbar-default navbar-fixed-top navbar-toggleable-md navbar-expand-lg scrolling-navbar double-nav">
+            <div class="container-fluid">
+                <div class="navbar-header">
+                    <a class="navbar-brand navbar-center" href="#">Smart Archive for IT senior project</a>
+                </div>
+
+                <div id="navbar" class="navbar-collapse collapse">
+                    @if (HttpContext.Current.Session["UserID"] != null)
+                    {
+                        using (Html.BeginForm("LogOut", "Home", FormMethod.Post, new { id = "logoutForm" }))
+                        {
+                            <ul class="nav navbar-nav, welcome">
+                                <li style="color:#183F66; margin-top:7px;" @*class="glyphicon glyphicon-user"*@>Welcome @Session["UserName"].ToString()</li>
+                                <li style="width:75px;">  @Html.ActionLink("LogOut", "LogOut", "Home", null, new { @class = "fa fa-sign-out" })</li>
+                            </ul>
+                            @* </ul>*@
+                        }
+                    }
+                    else
+                    {
+                        <ul class="nav navbar-right nav-flex-icons ml-auto">
+                            <li id="nav" class="nav-item ">
+                                @Html.ActionLink("LogIn", "Index", "Login", null, new { @class = "fa fa-sign-in" })
+                            </li>
+                        </ul>
+                    }
+                </div>
+            </div>
+
+        </nav>
+        <!--End second nav-->
+
+        <div class="container body-content" style="margin-top:60px; padding-top:20px;">
+            <hr />
+            @RenderBody()
+            <div class="container">
+                <hr />
+            </div>
+        </div>
+    </div>
+    @RenderSection("scripts", required: false)
+
+
+
+</body>
+</html>

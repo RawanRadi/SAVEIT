@@ -1,0 +1,149 @@
+﻿@model SaVeIT_Final.Models.supervisor1
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_Layout3.cshtml";
+}
+<!--model SaVeIT_Final.Models.User-->
+<!--model Tuple<SaVeIT_Final.Models.User, SaVeIT_Final.Models.AreaOFInterest>-->
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<style>
+
+    .boxx {
+        height: 40px;
+        text-align: left;
+        padding: 10px 5px 2px 5px;
+        margin: 20px 20px 50px 20px;
+        position: relative;
+        border-bottom: 1px solid #CCC;
+        border-radius: 3px;
+        width: 50%;
+    }
+
+    .cc {
+        padding: 0px 15px 15px 15px;
+        margin: 0px 5px 5px 25px;
+        text-align: left;
+    }
+
+    .ss {
+        padding: 0px 15px 15px 15px;
+        margin: 0px 5px 5px 25px;
+        text-align: left;
+        display: block;
+    }
+
+    .p, .boxx {
+        font-size: 18px;
+        font-family: Arial, Helvetica, sans-serif;
+    }
+
+    ol {
+        counter-reset: li; /* Initiate a counter */
+        list-style: none; /* Remove default numbering */
+        *list-style: decimal; /* Keep using default numbering for IE6/7 */
+        font: 15px 'trebuchet MS', 'lucida sans';
+        padding: 0;
+        margin-bottom: 4em;
+        text-shadow: 0 1px 0 rgba(255,255,255,.5);
+    }
+
+
+    .rectangle-listt a {
+        position: relative;
+        display: block;
+        padding: .4em .4em .4em .8em;
+        *padding: .4em;
+        margin: .5em 0 .5em 2.5em;
+        background: #ddd;
+        text-decoration: none;
+        transition: all .3s ease-out;
+        width: 20em;
+    }
+
+        .rectangle-listt a:hover {
+            background: #eee;
+        }
+
+        .rectangle-listt a:before {
+            content: counter(li);
+            counter-increment: li;
+            position: absolute;
+            left: -2.5em;
+            top: 50%;
+            margin-top: -1em;
+            background: #183F66;
+            height: 2em;
+            width: 2em;
+            line-height: 2em;
+            text-align: center;
+            font-weight: bold;
+            color: white;
+        }
+
+        .rectangle-listt a:after {
+            position: absolute;
+            content: '';
+            border: .5em solid transparent;
+            left: -1em;
+            top: 50%;
+            margin-top: -.5em;
+            transition: all .3s ease-out;
+        }
+
+        .rectangle-listt a:hover:after {
+            left: -.5em;
+            border-left-color: #183F66;
+        }
+</style>
+
+<h3>@Html.DisplayFor(item => item.userName)</h3>
+
+<div class="container body-content">
+    <div class="boxx">
+        Supervisor Information:
+    </div>
+    <div class="ss">
+        <p class="p">- supervisor name:  <span> @Html.DisplayFor(item => item.userName)</span></p>
+        <p class="p">- supervisor Email:  <span> @Html.DisplayFor(item => item.userEmail)</span></p>
+    </div>
+
+
+    <div class="boxx">
+        Projects supervised by her:
+    </div>
+    <div class="cc">
+        <ol class="rectangle-listt">
+            <!--SeniorProjects-->
+            @foreach (var item in Model.SeniorProjects)
+            {
+
+                <li>
+                    <a href="@Url.Action("Project","AreaOfInterest",new {id=item.SPtId})">
+                        @Html.DisplayFor(modelItem => item.SPName)
+                    </a>
+                </li>
+
+            }
+        </ol>
+    </div>
+    <div class="boxx">
+        Area of Interest:
+    </div>
+    <div class="cc">
+        <ol class="rectangle-listt">
+            <!--SeniorProjects-->
+            @foreach (var item in Model.AOIs)
+            {
+
+                <li>
+                    <a>
+                        @Html.DisplayFor(modelItem => item.AOIName)
+                    </a>
+                </li>
+
+            }
+        </ol>
+    </div>
+</div>

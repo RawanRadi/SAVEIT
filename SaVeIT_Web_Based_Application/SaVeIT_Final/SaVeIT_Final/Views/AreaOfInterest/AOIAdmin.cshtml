@@ -1,0 +1,138 @@
+﻿
+@model IEnumerable<SaVeIT_Final.Models.AreaOFInterest>
+
+@{
+    ViewBag.Title = "Area of Interest";
+    Layout = "~/Views/Shared/_Layout3.cshtml";
+}
+
+
+<h2>Areas of Interest</h2>
+
+<style>
+    tr.even {
+        background-color: #F5F5F5 !important;
+    }
+
+    .button {
+        display: inline-block;
+        padding: 5px 15px;
+        margin: 15px;
+        font-size: 14px;
+        cursor: pointer;
+        text-align: center;
+        text-decoration: none;
+        outline: none;
+        color: #fff;
+        background-color: dimgray;
+        border: none;
+        border-radius: 15px;
+        box-shadow: 0 3px #999;
+    }
+
+        .button:hover {
+            background-color: #3e8e41
+        }
+
+        .button:active {
+            background-color: black;
+            box-shadow: 0 5px #666;
+            transform: translateY(4px);
+        }
+</style>
+
+<a href="@Url.Action("Add","AreaOfInterest")" class="btn btn-default" style="background-color:#183F66 ;color:white; margin-bottom:10px; ">Create New Area Of Interest</a>
+
+<table id="myTable" style="width:100%; border:solid;" class="table table-bordered table-striped">
+    <thead>
+        <tr style="border:solid;">
+            <th> Name</th>
+            <th>View</th>
+            <th>Edit</th>
+            <th>Delete</th>
+        </tr>
+    </thead>
+</table>
+
+@* Load datatable css *@
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+
+<link href="https://cdn.datatables.net/1.10.15/css/dataTables.bootstrap.min.css" rel="stylesheet" />
+<link href="https://cdn.datatables.net/responsive/2.1.1/css/responsive.bootstrap.min.css" rel="stylesheet" />
+@* Load datatable js *@
+@section Scripts{
+    <script src="https://cdn.datatables.net/1.10.15/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/1.10.15/js/dataTables.bootstrap4.min.js "></script>
+    <script>
+
+        $(document).ready(function () {
+            $('#myTable').DataTable({
+
+                "ajax": {
+                    "url": "/AreaOfInterest/loaddata",
+                    "type": "GET",
+                    "datatype": "json"
+                },
+                "columns": [
+                    { "data": "AOIName", "autoWidth": true },
+                    {
+
+                        "render": function (data, type, full, meta) {
+                            return '<a style ="background :none;" class="btn btn-default btn-md glyphicon glyphicon-eye-open" href="/AreaOfInterest/EachAreaAdmin2/' + full.AOIId + '"></a>'; }
+                    },
+                    {
+                        "render": function (data, type, full, meta) { return '<a class="btn btn-info fa fa-edit" href="/AreaOfInterest/Edit/' + full.AOIId + '"></a>'; }
+                    },
+
+                    {
+                        data: null, render: function (data, type, row) {
+                            return "<a href='/AreaOfInterest/Delete/" + row.AOIId + "' class='btn btn-danger fa fa-trash' onclick=DeleteData('" + row.AOIId + "'); ></a>";
+                           // return '<a class="btn btn-danger" href="/AreaOfInterest/Delete/' + row.AOIId + '"  onclick=DeleteData("' + row.AOIId + '"); >Delete</a>";
+
+                        }
+                    },
+                ]
+            });
+        });
+
+         function DeleteData(AOIId)
+        {
+            if (confirm("Are you sure you want to delete ...?"))
+            {
+                Delete(AOIId);
+            }
+            else
+            {
+                return false;
+            }
+        }
+
+
+         function Delete(AOIId)
+    {
+            var url = '@Url.Content("~/")' + "AreaOfInterest/Delete";
+
+            $.post(url, { ID: AOIId }, function (data)
+                {
+                    if (data)
+                    {
+                        oTable = $('#myTable').DataTable();
+                        oTable.draw();
+                    }
+                    else
+                    {
+                        alert("Something Went Wrong!");
+                    }
+                });
+         }
+
+
+        function Submit() {
+            if (confirm("Are you sure you want to delete the record?")) {
+                return true;
+            } else {
+                return false;
+            }
+        }
+    </script>
+}

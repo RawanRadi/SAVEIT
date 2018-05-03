@@ -1,0 +1,44 @@
+﻿@model IEnumerable<SaVeIT_Final.Models.News>
+
+@{
+    ViewBag.Title = "News";
+    Layout = "~/Views/Shared/_Layout3.cshtml";
+}
+
+<div class="container well col-xs-8 col-sm-8 col-md-8"
+     style="background-color:white; padding:50px; padding-top:5px; margin-top:10px;">
+    <h2>News</h2>
+
+    <div class="panel-group" style="padding-top:10px;">
+        <div class="panel panel-default" style="padding-bottom:8px; color:black;">
+            @foreach (var item in Model)
+            {
+                <div class="align-top align-left col-xs-2 col-sm-2 col-md-2 well"
+                     style="border:none; height:40px; width:120px;
+                        background-color:whitesmoke; margin-top:0px;">
+                    <label>@Html.DisplayFor(modelItem => item.newDate)</label>
+                </div>
+                if (item.newImg != null)
+                {
+                    string imageBase64 = Convert.ToBase64String(item.newImg);
+                    string imageSrc = string.Format("data:image/gif;base64,{0}", imageBase64);
+                    <img src="@imageSrc" class="navbar-right" style="width:100px; height:90px; margin-right:10px; margin-top:70px;" />
+                }
+
+                <div class="panel-heading">
+                    <h4>@Html.DisplayFor(modelItem => item.newName)</h4>
+                </div>
+                <div class="panel-body" style="text-align:left;">
+                    <p>@Html.DisplayFor(modelItem => item.newContent.Split('&')[0])</p>
+                </div>
+                <div style="margin-left:30px; display:inline-block;">
+                    @Html.ActionLink("Read More", "News", new { id = item.newId })
+                </div><hr>
+            }
+        </div>
+    </div>
+</div>
+
+
+
+

@@ -1,0 +1,39 @@
+﻿
+/*To change the color of selected tab*/
+.nav-tabs > li.active > a, .nav-tabs > li.active > a:hover, .nav-tabs > li.active > a:focus {
+    background-color: #E8E8E8;
+}
+/*To set submit button right*/
+#navigation li:last-child {
+    float: right;
+}
+
+table {
+    border-collapse: separate;
+    border-spacing: 0;
+}
+
+td {
+    position: relative;
+    padding: 15px;
+}
+
+td {
+    left: 10px;
+}
+
+    td:first-child {
+        left: 0px;
+    }
+
+    td:nth-child(3) {
+        left: 20px;
+    }
+
+#navigation a {
+    font-weight: bold;
+}
+
+.validation-summary-valid {
+    display: none;
+}

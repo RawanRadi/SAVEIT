@@ -1,0 +1,34 @@
+﻿@model  SaVeIT_Final.Models.News
+
+@{
+    ViewBag.Title = "News";
+    Layout = "~/Views/Shared/_Layout3.cshtml";
+}
+
+<div class="container well col-xs-8 col-sm-8 col-md-8 dl"
+     style="background-color:white; margin-top:80px;">
+    <div class="align-top col-xs-2 col-sm-2 col-md-2  rounded well"
+         style="height:40px; width:140px; background-color:white; margin-top:-35px; margin-left:0px;">
+        <label style="text-align:center; margin-left:8px; margin-top:-15px;">
+            @Html.DisplayFor(model => model.newDate)
+        </label>
+    </div>
+    <div class="col-xs-4 col-sm-4 col-md-4" style="margin-left:-120px; margin-top:20px;">
+        <div class="col-xs-4 col-sm-4 col-md-4" style="margin-left:140px; width:600px;">
+            <h4>@Html.DisplayFor(model => model.newName)</h4>
+        </div>
+        <div style="margin-left:90px;">
+            <br>
+            @if (Model.newImg != null)
+            {
+            string imageBase64 = Convert.ToBase64String(Model.newImg);
+            string imageSrc = string.Format("data:image/gif;base64,{0}", imageBase64);
+            <img src="@imageSrc" class="img-rounded" style="margin-left:45px; width:500px;" />
+            }
+            <div class="container body-content"
+                 style="width:670px; height:450px; text-align:left; padding-top:50px;">
+                <p>@Html.DisplayFor(model => model.newContent)</p>
+            </div>
+        </div>
+    </div>
+</div>

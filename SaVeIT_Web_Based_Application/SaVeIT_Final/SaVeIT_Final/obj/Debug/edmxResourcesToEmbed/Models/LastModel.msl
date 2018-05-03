@@ -1,0 +1,133 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="Model2StoreContainer" CdmEntityContainer="Entities2">
+    <EntitySetMapping Name="AreaOFInterests">
+      <EntityTypeMapping TypeName="Model2.AreaOFInterest">
+        <MappingFragment StoreEntitySet="AreaOFInterest">
+          <ScalarProperty Name="AOIId" ColumnName="AOIId" />
+          <ScalarProperty Name="AOIName" ColumnName="AOIName" />
+          <ScalarProperty Name="AOIIcon" ColumnName="AOIIcon" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Awards">
+      <EntityTypeMapping TypeName="Model2.Award">
+        <MappingFragment StoreEntitySet="Award">
+          <ScalarProperty Name="awardId" ColumnName="awardId" />
+          <ScalarProperty Name="awardName" ColumnName="awardName" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="FileDetails">
+      <EntityTypeMapping TypeName="Model2.FileDetail">
+        <MappingFragment StoreEntitySet="FileDetails">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="FileName" ColumnName="FileName" />
+          <ScalarProperty Name="FileContent" ColumnName="FileContent" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="News">
+      <EntityTypeMapping TypeName="Model2.News">
+        <MappingFragment StoreEntitySet="News">
+          <ScalarProperty Name="newId" ColumnName="newId" />
+          <ScalarProperty Name="newName" ColumnName="newName" />
+          <ScalarProperty Name="newContent" ColumnName="newContent" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ProjectsAOIs">
+      <EntityTypeMapping TypeName="Model2.ProjectsAOI">
+        <MappingFragment StoreEntitySet="ProjectsAOI">
+          <ScalarProperty Name="SPtId" ColumnName="SPtId" />
+          <ScalarProperty Name="AOIId" ColumnName="AOIId" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="SeniorProjects">
+      <EntityTypeMapping TypeName="Model2.SeniorProject">
+        <MappingFragment StoreEntitySet="SeniorProject">
+          <ScalarProperty Name="SPtId" ColumnName="SPtId" />
+          <ScalarProperty Name="SPName" ColumnName="SPName" />
+          <ScalarProperty Name="SPAbstract" ColumnName="SPAbstract" />
+          <ScalarProperty Name="SPYear" ColumnName="SPYear" />
+          <ScalarProperty Name="SPGrade" ColumnName="SPGrade" />
+          <ScalarProperty Name="SPReport" ColumnName="SPReport" />
+          <ScalarProperty Name="SPImages" ColumnName="SPImages" />
+          <ScalarProperty Name="SPVideos" ColumnName="SPVideos" />
+          <ScalarProperty Name="supervisorId" ColumnName="supervisorId" />
+          <ScalarProperty Name="awardId" ColumnName="awardId" />
+          <ScalarProperty Name="progLang" ColumnName="progLang" />
+          <ScalarProperty Name="SPReportName" ColumnName="SPReportName" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Stu_Projects">
+      <EntityTypeMapping TypeName="Model2.Stu_Projects">
+        <MappingFragment StoreEntitySet="Stu_Projects">
+          <ScalarProperty Name="PId" ColumnName="PId" />
+          <ScalarProperty Name="StuId" ColumnName="StuId" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Students">
+      <EntityTypeMapping TypeName="Model2.Student">
+        <MappingFragment StoreEntitySet="Student">
+          <ScalarProperty Name="studentId" ColumnName="studentId" />
+          <ScalarProperty Name="studentName" ColumnName="studentName" />
+          <ScalarProperty Name="studentEmail" ColumnName="studentEmail" />
+          <ScalarProperty Name="groupId_SPtId" ColumnName="groupId_SPtId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="SupAOIs">
+      <EntityTypeMapping TypeName="Model2.SupAOI">
+        <MappingFragment StoreEntitySet="SupAOI">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="AOIId" ColumnName="AOIId" />
+          <ScalarProperty Name="supervisorId" ColumnName="supervisorId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="SupervisorRoles">
+      <EntityTypeMapping TypeName="Model2.SupervisorRole">
+        <MappingFragment StoreEntitySet="SupervisorRole">
+          <ScalarProperty Name="roleId" ColumnName="roleId" />
+          <ScalarProperty Name="roleName" ColumnName="roleName" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Supervisors">
+      <EntityTypeMapping TypeName="Model2.Supervisor">
+        <MappingFragment StoreEntitySet="Supervisors">
+          <ScalarProperty Name="supervisorId" ColumnName="supervisorId" />
+          <ScalarProperty Name="supervisorName" ColumnName="supervisorName" />
+          <ScalarProperty Name="supervisorEmail" ColumnName="supervisorEmail" />
+          <ScalarProperty Name="supervisorRole" ColumnName="supervisorRole" />
+          <ScalarProperty Name="password" ColumnName="password" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="UserRoles">
+      <EntityTypeMapping TypeName="Model2.UserRole">
+        <MappingFragment StoreEntitySet="UserRole">
+          <ScalarProperty Name="roleId" ColumnName="roleId" />
+          <ScalarProperty Name="roleName" ColumnName="roleName" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Users">
+      <EntityTypeMapping TypeName="Model2.User">
+        <MappingFragment StoreEntitySet="Users">
+          <ScalarProperty Name="userId" ColumnName="userId" />
+          <ScalarProperty Name="userName" ColumnName="userName" />
+          <ScalarProperty Name="userEmail" ColumnName="userEmail" />
+          <ScalarProperty Name="userRole" ColumnName="userRole" />
+          <ScalarProperty Name="password" ColumnName="password" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

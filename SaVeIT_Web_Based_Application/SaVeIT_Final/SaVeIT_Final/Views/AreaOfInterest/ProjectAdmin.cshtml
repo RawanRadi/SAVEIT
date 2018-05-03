@@ -1,0 +1,97 @@
+﻿    @model IEnumerable<SaVeIT_Final.Models.SeniorProject>
+
+@{
+    ViewBag.Title = "ProjectAdmin";
+    Layout = "~/Views/Shared/_Layout3.cshtml";
+}
+
+<head>
+
+</head>
+<style>
+    tr.even {
+        background-color: #F5F5F5 !important;
+    }
+</style>
+<table id="myTable" style="width:100%; border:solid;" class="table">
+    <thead>
+        <tr style="border:solid;">
+            <th> Name</th>
+            <th>View</th>
+            <th>Edit</th>
+            <th>Delete</th>
+        </tr>
+    </thead>
+</table>
+
+@* Load datatable css *@
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+
+<link href="https://cdn.datatables.net/1.10.15/css/dataTables.bootstrap.min.css" rel="stylesheet" />
+<link href="https://cdn.datatables.net/responsive/2.1.1/css/responsive.bootstrap.min.css" rel="stylesheet" />
+@* Load datatable js *@
+@section Scripts{
+    <script src="https://cdn.datatables.net/1.10.15/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/1.10.15/js/dataTables.bootstrap4.min.js "></script>
+    <script>
+        $(document).ready(function () {
+            $('#myTable').DataTable({
+
+                "ajax": {
+                    "url": "/AreaOfInterest/loadProject",
+                    "type": "GET",
+                    "datatype": "json"
+                },
+                "columns": [
+                    { "data": "SPName", "autoWidth": true },
+                    {
+
+                        "render": function (data, type, full, meta) {
+                            return '<a style ="background :none;" class="btn btn-default btn-md glyphicon glyphicon-eye-open" href="/AreaOfInterest/EachArea/' + full.SPtId + '"></a>'; }
+                    },
+                    {
+
+                        "render": function (data, type, full, meta) { return '<a class="btn btn-info" href="/SeniorProjects/Edit/' + full.SPtId + '">Edit</a>'; }
+                    },
+
+                    {
+                        data: null, render: function (data, type, row) {
+                            return "<a href='#' class='btn btn-danger' onclick=DeleteData('" + row.SPtId + "'); >Delete</a>";
+                        }
+                    },
+                ]
+            });
+        });
+
+        function DeleteData(SPtId)
+        {
+            if (confirm("Are you sure you want to delete ...?"))
+            {
+                Delete(SPtId);
+            }
+            else
+            {
+                return false;
+            }
+        }
+
+
+        function Delete(SPtId)
+    {
+            var url = '@Url.Content("~/")' + "AreaOfInterest/Delete";
+
+            $.post(url, { ID: SPtId }, function (data)
+                {
+                    if (data)
+                    {
+                        oTable = $('#myTable').DataTable();
+                        oTable.draw();
+                    }
+                    else
+                    {
+                        alert("Something Went Wrong!");
+                    }
+                });
+    }
+    </script>
+}

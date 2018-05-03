@@ -1,0 +1,36 @@
+﻿body {
+}
+.graphs{
+background-color:grey;
+}
+
+.fill {
+    overflow: hidden;
+    background-size: cover;
+    background-position: center;
+    background-image: url('../images/trends.png');
+}
+.mining {
+    width: 300px;
+    overflow: auto;
+    width: 100%;
+    height: auto;
+    display: block;
+    object-fit: cover;
+}
+.imgs {
+    margin-left: -30px
+}
+.GraphContainer {
+    margin-top: 50px;
+    margin-left: -15px
+}
+/*This class to word-wrap long words in a div */
+.wordWrap {
+    word-wrap: break-word;
+}
+select {
+    width: 100px;
+}
+/*Style for range slider*/
+

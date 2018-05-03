@@ -1,0 +1,32 @@
+﻿body {
+}
+.row {
+    margin-top: 40px;
+    padding: 0 10px;
+}
+
+.clickable {
+    cursor: pointer;
+}
+/*Style for pannel that contains project info and contact with students*/
+.panel-heading span {
+    margin-top: -20px;
+    font-size: 15px;
+}
+.panel-heading [data-toggle="collapse"]:after {
+    font-family: 'Glyphicons Halflings';
+    content: "\e072";
+    float: right;
+    color: #183F66;
+    font-size: 18px;
+    line-height: 22px;
+    -webkit-transform: rotate(-90deg);
+    -moz-transform: rotate(-90deg);
+    -ms-transform: rotate(-90deg);
+    -o-transform: rotate(-90deg);
+    transform: rotate(-90deg);
+}
+/*End of pannel style*/
+#newLine {
+    clear: left;
+}

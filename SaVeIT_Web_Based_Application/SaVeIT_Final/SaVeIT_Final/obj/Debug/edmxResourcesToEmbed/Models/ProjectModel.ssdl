@@ -1,0 +1,413 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="SaVeITModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="AreaOFInterest">
+    <Key>
+      <PropertyRef Name="AOIId" />
+    </Key>
+    <Property Name="AOIId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="AOIName" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="AOIIcon" Type="varbinary(max)" />
+  </EntityType>
+  <EntityType Name="Award">
+    <Key>
+      <PropertyRef Name="awardId" />
+    </Key>
+    <Property Name="awardId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="awardName" Type="varchar(max)" Nullable="false" />
+  </EntityType>
+  <EntityType Name="News">
+    <Key>
+      <PropertyRef Name="newId" />
+    </Key>
+    <Property Name="newId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="newName" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="newImg" Type="varbinary(max)" />
+    <Property Name="newDate" Type="datetime" />
+    <Property Name="newContent" Type="varchar(max)" />
+  </EntityType>
+  <EntityType Name="ProjectAward">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="AwardId" Type="int" Nullable="false" />
+    <Property Name="ProjectId" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="ProjectsAOI">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="SPtId" Type="int" Nullable="false" />
+    <Property Name="AOIId" Type="int" Nullable="false" />
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+  </EntityType>
+  <EntityType Name="SeniorProject">
+    <Key>
+      <PropertyRef Name="SPtId" />
+    </Key>
+    <Property Name="SPtId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="SPName" Type="varchar(max)" Nullable="false" />
+    <Property Name="SPAbstract" Type="varchar(max)" />
+    <Property Name="SPGrade" Type="varchar" MaxLength="50" />
+    <Property Name="SPReport" Type="varbinary(max)" />
+    <Property Name="SPVideos" Type="varchar(max)" />
+    <Property Name="supervisorId" Type="varchar" MaxLength="50" />
+    <Property Name="supervisorUserId" Type="varchar" MaxLength="50" />
+    <Property Name="awardId" Type="int" />
+    <Property Name="progLang" Type="varchar(max)" />
+    <Property Name="SPReportName" Type="varchar(max)" />
+    <Property Name="Year" Type="smallint" />
+    <Property Name="Section" Type="varchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="Stu_Projects">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="PId" Type="int" Nullable="false" />
+    <Property Name="StuId" Type="int" />
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="studentUserId" Type="varchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="Student">
+    <Key>
+      <PropertyRef Name="studentId" />
+    </Key>
+    <Property Name="studentId" Type="int" Nullable="false" />
+    <Property Name="studentName" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="studentEmail" Type="varchar" MaxLength="50" />
+    <Property Name="groupId_SPtId" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="SupAOI">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="AOIId" Type="int" Nullable="false" />
+    <Property Name="supervisorId" Type="varchar" MaxLength="50" />
+    <Property Name="supervisorUserId" Type="varchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="SupervisorRole">
+    <Key>
+      <PropertyRef Name="roleId" />
+    </Key>
+    <Property Name="roleId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="roleName" Type="varchar" MaxLength="50" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Supervisors">
+    <Key>
+      <PropertyRef Name="supervisorId" />
+    </Key>
+    <Property Name="supervisorId" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="supervisorName" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="supervisorEmail" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="supervisorRole" Type="int" />
+    <Property Name="password" Type="nchar" MaxLength="10" Nullable="false" />
+  </EntityType>
+  <EntityType Name="UserRole">
+    <Key>
+      <PropertyRef Name="userId" />
+    </Key>
+    <Property Name="userId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="userName" Type="varchar" MaxLength="50" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Users">
+    <Key>
+      <PropertyRef Name="userId" />
+    </Key>
+    <Property Name="userId" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="userName" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="userEmail" Type="varchar" MaxLength="50" />
+    <Property Name="userRole" Type="int" />
+    <Property Name="password" Type="nchar" MaxLength="10" />
+    <Property Name="projectGroup" Type="int" />
+  </EntityType>
+  <Association Name="FK__ProjectAw__Award__68D28DBC">
+    <End Role="Award" Type="Self.Award" Multiplicity="1" />
+    <End Role="ProjectAward" Type="Self.ProjectAward" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Award">
+        <PropertyRef Name="awardId" />
+      </Principal>
+      <Dependent Role="ProjectAward">
+        <PropertyRef Name="AwardId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__ProjectAw__Proje__24E777C3">
+    <End Role="SeniorProject" Type="Self.SeniorProject" Multiplicity="1" />
+    <End Role="ProjectAward" Type="Self.ProjectAward" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="SeniorProject">
+        <PropertyRef Name="SPtId" />
+      </Principal>
+      <Dependent Role="ProjectAward">
+        <PropertyRef Name="ProjectId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__ProjectsA__AOIId__2DB1C7EE">
+    <End Role="AreaOFInterest" Type="Self.AreaOFInterest" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="ProjectsAOI" Type="Self.ProjectsAOI" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="AreaOFInterest">
+        <PropertyRef Name="AOIId" />
+      </Principal>
+      <Dependent Role="ProjectsAOI">
+        <PropertyRef Name="AOIId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__ProjectsA__SPtId__220B0B18">
+    <End Role="SeniorProject" Type="Self.SeniorProject" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="ProjectsAOI" Type="Self.ProjectsAOI" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="SeniorProject">
+        <PropertyRef Name="SPtId" />
+      </Principal>
+      <Dependent Role="ProjectsAOI">
+        <PropertyRef Name="SPtId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Stu_Proje__StuId__214BF109">
+    <End Role="Student" Type="Self.Student" Multiplicity="0..1" />
+    <End Role="Stu_Projects" Type="Self.Stu_Projects" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Student">
+        <PropertyRef Name="studentId" />
+      </Principal>
+      <Dependent Role="Stu_Projects">
+        <PropertyRef Name="StuId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Stu_Project__PId__22FF2F51">
+    <End Role="SeniorProject" Type="Self.SeniorProject" Multiplicity="1" />
+    <End Role="Stu_Projects" Type="Self.Stu_Projects" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="SeniorProject">
+        <PropertyRef Name="SPtId" />
+      </Principal>
+      <Dependent Role="Stu_Projects">
+        <PropertyRef Name="PId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_AOI_AreaOfInterest">
+    <End Role="AreaOFInterest" Type="Self.AreaOFInterest" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="SupAOI" Type="Self.SupAOI" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="AreaOFInterest">
+        <PropertyRef Name="AOIId" />
+      </Principal>
+      <Dependent Role="SupAOI">
+        <PropertyRef Name="AOIId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_AOI_Supervisors">
+    <End Role="Users" Type="Self.Users" Multiplicity="0..1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="SupAOI" Type="Self.SupAOI" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Users">
+        <PropertyRef Name="userId" />
+      </Principal>
+      <Dependent Role="SupAOI">
+        <PropertyRef Name="supervisorUserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_SeniorProject_Award">
+    <End Role="Award" Type="Self.Award" Multiplicity="0..1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="SeniorProject" Type="Self.SeniorProject" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Award">
+        <PropertyRef Name="awardId" />
+      </Principal>
+      <Dependent Role="SeniorProject">
+        <PropertyRef Name="awardId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_SeniorProject_Supervisors">
+    <End Role="Supervisors" Type="Self.Supervisors" Multiplicity="0..1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="SeniorProject" Type="Self.SeniorProject" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Supervisors">
+        <PropertyRef Name="supervisorId" />
+      </Principal>
+      <Dependent Role="SeniorProject">
+        <PropertyRef Name="supervisorId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_SeniorProject_SupervisorUser">
+    <End Role="Users" Type="Self.Users" Multiplicity="0..1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="SeniorProject" Type="Self.SeniorProject" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Users">
+        <PropertyRef Name="userId" />
+      </Principal>
+      <Dependent Role="SeniorProject">
+        <PropertyRef Name="supervisorUserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Student_SeniorProject">
+    <End Role="SeniorProject" Type="Self.SeniorProject" Multiplicity="1" />
+    <End Role="Student" Type="Self.Student" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="SeniorProject">
+        <PropertyRef Name="SPtId" />
+      </Principal>
+      <Dependent Role="Student">
+        <PropertyRef Name="groupId_SPtId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Supervisors_SupervisorRole">
+    <End Role="SupervisorRole" Type="Self.SupervisorRole" Multiplicity="0..1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="Supervisors" Type="Self.Supervisors" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="SupervisorRole">
+        <PropertyRef Name="roleId" />
+      </Principal>
+      <Dependent Role="Supervisors">
+        <PropertyRef Name="supervisorRole" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Test_Supervisors">
+    <End Role="Supervisors" Type="Self.Supervisors" Multiplicity="0..1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="SupAOI" Type="Self.SupAOI" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Supervisors">
+        <PropertyRef Name="supervisorId" />
+      </Principal>
+      <Dependent Role="SupAOI">
+        <PropertyRef Name="supervisorId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Users_ToSP">
+    <End Role="SeniorProject" Type="Self.SeniorProject" Multiplicity="0..1" />
+    <End Role="Users" Type="Self.Users" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="SeniorProject">
+        <PropertyRef Name="SPtId" />
+      </Principal>
+      <Dependent Role="Users">
+        <PropertyRef Name="projectGroup" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Users_UserRole">
+    <End Role="UserRole" Type="Self.UserRole" Multiplicity="0..1" />
+    <End Role="Users" Type="Self.Users" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="UserRole">
+        <PropertyRef Name="userId" />
+      </Principal>
+      <Dependent Role="Users">
+        <PropertyRef Name="userRole" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="SaVeITModelStoreContainer">
+    <EntitySet Name="AreaOFInterest" EntityType="Self.AreaOFInterest" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Award" EntityType="Self.Award" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="News" EntityType="Self.News" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="ProjectAward" EntityType="Self.ProjectAward" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="ProjectsAOI" EntityType="Self.ProjectsAOI" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="SeniorProject" EntityType="Self.SeniorProject" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Stu_Projects" EntityType="Self.Stu_Projects" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Student" EntityType="Self.Student" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="SupAOI" EntityType="Self.SupAOI" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="SupervisorRole" EntityType="Self.SupervisorRole" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Supervisors" EntityType="Self.Supervisors" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="UserRole" EntityType="Self.UserRole" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Users" EntityType="Self.Users" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK__ProjectAw__Award__68D28DBC" Association="Self.FK__ProjectAw__Award__68D28DBC">
+      <End Role="Award" EntitySet="Award" />
+      <End Role="ProjectAward" EntitySet="ProjectAward" />
+    </AssociationSet>
+    <AssociationSet Name="FK__ProjectAw__Proje__24E777C3" Association="Self.FK__ProjectAw__Proje__24E777C3">
+      <End Role="SeniorProject" EntitySet="SeniorProject" />
+      <End Role="ProjectAward" EntitySet="ProjectAward" />
+    </AssociationSet>
+    <AssociationSet Name="FK__ProjectsA__AOIId__2DB1C7EE" Association="Self.FK__ProjectsA__AOIId__2DB1C7EE">
+      <End Role="AreaOFInterest" EntitySet="AreaOFInterest" />
+      <End Role="ProjectsAOI" EntitySet="ProjectsAOI" />
+    </AssociationSet>
+    <AssociationSet Name="FK__ProjectsA__SPtId__220B0B18" Association="Self.FK__ProjectsA__SPtId__220B0B18">
+      <End Role="SeniorProject" EntitySet="SeniorProject" />
+      <End Role="ProjectsAOI" EntitySet="ProjectsAOI" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Stu_Proje__StuId__214BF109" Association="Self.FK__Stu_Proje__StuId__214BF109">
+      <End Role="Student" EntitySet="Student" />
+      <End Role="Stu_Projects" EntitySet="Stu_Projects" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Stu_Project__PId__22FF2F51" Association="Self.FK__Stu_Project__PId__22FF2F51">
+      <End Role="SeniorProject" EntitySet="SeniorProject" />
+      <End Role="Stu_Projects" EntitySet="Stu_Projects" />
+    </AssociationSet>
+    <AssociationSet Name="FK_AOI_AreaOfInterest" Association="Self.FK_AOI_AreaOfInterest">
+      <End Role="AreaOFInterest" EntitySet="AreaOFInterest" />
+      <End Role="SupAOI" EntitySet="SupAOI" />
+    </AssociationSet>
+    <AssociationSet Name="FK_AOI_Supervisors" Association="Self.FK_AOI_Supervisors">
+      <End Role="Users" EntitySet="Users" />
+      <End Role="SupAOI" EntitySet="SupAOI" />
+    </AssociationSet>
+    <AssociationSet Name="FK_SeniorProject_Award" Association="Self.FK_SeniorProject_Award">
+      <End Role="Award" EntitySet="Award" />
+      <End Role="SeniorProject" EntitySet="SeniorProject" />
+    </AssociationSet>
+    <AssociationSet Name="FK_SeniorProject_Supervisors" Association="Self.FK_SeniorProject_Supervisors">
+      <End Role="Supervisors" EntitySet="Supervisors" />
+      <End Role="SeniorProject" EntitySet="SeniorProject" />
+    </AssociationSet>
+    <AssociationSet Name="FK_SeniorProject_SupervisorUser" Association="Self.FK_SeniorProject_SupervisorUser">
+      <End Role="Users" EntitySet="Users" />
+      <End Role="SeniorProject" EntitySet="SeniorProject" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Student_SeniorProject" Association="Self.FK_Student_SeniorProject">
+      <End Role="SeniorProject" EntitySet="SeniorProject" />
+      <End Role="Student" EntitySet="Student" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Supervisors_SupervisorRole" Association="Self.FK_Supervisors_SupervisorRole">
+      <End Role="SupervisorRole" EntitySet="SupervisorRole" />
+      <End Role="Supervisors" EntitySet="Supervisors" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Test_Supervisors" Association="Self.FK_Test_Supervisors">
+      <End Role="Supervisors" EntitySet="Supervisors" />
+      <End Role="SupAOI" EntitySet="SupAOI" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Users_ToSP" Association="Self.FK_Users_ToSP">
+      <End Role="SeniorProject" EntitySet="SeniorProject" />
+      <End Role="Users" EntitySet="Users" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Users_UserRole" Association="Self.FK_Users_UserRole">
+      <End Role="UserRole" EntitySet="UserRole" />
+      <End Role="Users" EntitySet="Users" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

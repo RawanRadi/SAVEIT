@@ -1,0 +1,131 @@
+﻿@model IEnumerable<SaVeIT_Final.Models.User>
+@{
+    ViewBag.Title = "SupervisorAdmin";
+    Layout = "~/Views/Shared/_Layout3.cshtml";
+}
+
+<h2>Supervisors</h2>
+
+<style>
+    tr.even {
+        background-color: #F5F5F5 !important;
+    }
+
+    .button {
+        display: inline-block;
+        padding: 5px 15px;
+        margin: 15px;
+        font-size: 14px;
+        cursor: pointer;
+        text-align: center;
+        text-decoration: none;
+        outline: none;
+        color: #fff;
+        background-color: dimgray;
+        border: none;
+        border-radius: 15px;
+        box-shadow: 0 3px #999;
+    }
+
+        .button:hover {
+            background-color: #3e8e41
+        }
+
+        .button:active {
+            background-color: black;
+            box-shadow: 0 5px #666;
+            transform: translateY(4px);
+        }
+</style>
+
+<div class="container body-content">
+    <a href="@Url.Action("Create","Supervisors")" class="btn btn-default" style="background-color:#183F66 ;color:white; margin-bottom:10px; ">Add New Supervisors</a>
+
+    <table id="myTable" style="width:100%; border:solid;" class="table">
+        <thead>
+            <tr style="border:solid;">
+                <th> Name</th>
+                <th>View</th>
+                <th>Edit</th>
+                <th>Delete</th>
+            </tr>
+        </thead>
+    </table>
+</div>
+
+@* Load datatable css *@
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+
+<link href="https://cdn.datatables.net/1.10.15/css/dataTables.bootstrap.min.css" rel="stylesheet" />
+<link href="https://cdn.datatables.net/responsive/2.1.1/css/responsive.bootstrap.min.css" rel="stylesheet" />
+@* Load datatable js *@
+@section Scripts{
+    <script src="https://cdn.datatables.net/1.10.15/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/1.10.15/js/dataTables.bootstrap4.min.js "></script>
+    <script>
+
+        $(document).ready(function () {
+            $('#myTable').DataTable({
+
+                "ajax": {
+                    "url": "/Supervisors/loadSupervisorData",
+                    "type": "GET",
+                    "datatype": "json"
+                },
+                "columns": [
+                    { "data": "userName", "autoWidth": true },
+                    {
+
+                        "render": function (data, type, full, meta) {
+                            return '<a style ="background :none;" class="btn btn-default btn-md glyphicon glyphicon-eye-open" href="/Supervisors/Details/' + full.userId + '"></a>';
+                        }
+                    },
+                    {
+
+                        "render": function (data, type, full, meta) { return '<a class="btn btn-info fa fa-edit" href="/Supervisors/edit/' + full.userId + '"></a>'; }
+                    },
+
+                    {
+                        data: null, render: function (data, type, row) {
+                            return "<a href='/Supervisors/Delete/" + row.userId + "' class='btn btn-danger fa fa-trash' onclick=DeleteData('" + row.AOIId + "'); ></a>";
+                        }
+                    },
+                ]
+            });
+        });
+
+        function DeleteData(userId)
+        {
+            if (confirm("Are you sure you want to delete ...?"))
+            {
+                Delete(userId);
+            }
+            else
+            {
+                return false;
+            }
+        }
+
+
+        function Delete(userId)
+    {
+            var url = '@Url.Content("~/")' + "Supervisors/Delete";
+
+            $.post(url, { ID: userId }, function (data)
+                {
+                    if (data)
+                    {
+                        oTable = $('#myTable').DataTable();
+                        oTable.draw();
+                    }
+                    else
+                    {
+                        alert("Something Went Wrong!");
+                    }
+                });
+    }
+    </script>
+}
+
+
+

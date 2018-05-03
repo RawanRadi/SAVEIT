@@ -1,0 +1,141 @@
+﻿@model SaVeIT_Final.Models.SeniorProject
+
+
+@{
+    /**/
+
+    ViewBag.Title = "Project";
+    Layout = "~/Views/Shared/_Layout3.cshtml";
+}
+@Styles.Render("~/Content/ProjectStyle.css")
+<div class="container col-sm-10" style="margin-top:30px;">
+    <div class="panel-group" id="accordion">
+        @{
+        var aID = ViewContext.RouteData.Values["id"]; // To get the id of current open project
+        }
+
+
+        @using (Html.BeginForm("Project", "AreaOfInterest", null, FormMethod.Post, new { enctype = "multipart/form-data" }))
+    {
+        @Html.AntiForgeryToken()
+        <h2> @Html.DisplayFor(model => model.SPName)</h2> // Project name
+        
+    <div class="col-sm-6">
+        <div class="embed-responsive embed-responsive-16by9">
+       
+            <iframe class="embed-responsive-item" src="@Model.SPVideos" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+        </div>
+    </div>
+    <!--To force new line-->
+    <div id="newLine">
+    </div>
+
+    <!--Start pannel that contains project info-->
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <h4 class="panel-title">
+                <a data-toggle="collapse" data-parent="#accordion" href="#collapseOne">
+                    <strong> Project Information</strong>
+                </a>
+            </h4>
+        </div>
+        <div id="collapseOne" class="panel-collapse collapse in">
+            <div class="panel-body">
+                <p><strong> Abstract: </strong><br />  @Html.DisplayFor(model => model.SPAbstract)  </p>
+                <p></p>
+                <strong>Programming languages </strong> @Html.DisplayFor(model => model.progLang)   <br />
+                <p></p>
+                <p><strong>Supervisor:</strong> @Html.DisplayFor(model => model.User.userName) </p>
+                <p></p>
+                <p>
+                    <strong>Student group</strong>  <br />
+                    @foreach (var name in Model.Users)
+                {
+                    @Html.DisplayFor(modelItem => name.userName) <br />
+            }
+                </p>
+                <p><a href="@Url.Action("DownLoadFile", "SeniorProjectt", new { id = aID }, null)" class="btn btn-default" style="background-color:#183F66 ;color:white ">PDF Report</a></p>
+                <p class="text-danger">@ViewBag.ErrorMessage</p>
+            </div>
+        </div>
+    </div>
+}
+
+        <!-- .panel that contains contact with students -->
+        @using (Ajax.BeginForm("Contact", "AreaOfInterest", new { id = aID }, new AjaxOptions { HttpMethod = "POST", OnSuccess = "formSuccess" }))
+    {
+        @Html.AntiForgeryToken()
+        @Html.Raw(TempData["msg"])
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h4 class="panel-title">
+                    <a class="collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseThree">
+                        <strong> Contact with students </strong>
+                    </a>
+                </h4>
+            </div>
+            <div id="collapseThree" class="panel-collapse collapse">
+                <div class="panel-body">
+                    <form>
+                        <div class="form-group">
+                            <label class="sr-only" for="contact-name">Name</label>
+                            <input type="text" name="FromName" placeholder="your name..." class="contact-name form-control" id="contact-name" required>
+                        </div>
+                        <div class="form-group">
+                            <label class="sr-only" for="contact-email">Email</label>
+                            <input type="email" name="FromEmail" placeholder="your email..." class="contact-email form-control" id="contact-email" required>
+                        </div>
+                        <div class="form-group">
+                            <label class="sr-only" for="contact-subject">Subject</label>
+                            <input type="text" name="subject" placeholder="Subject..." class="contact-subject form-control" id="contact-subject" required>
+                        </div>
+                        <div class="form-group">
+                            <label class="sr-only" for="contact-message">Message</label>
+                            <textarea name="Message" placeholder="Message..." class="contact-message form-control" id="contact-message" required></textarea>
+                        </div>
+
+                        <input type="submit" class="btn btn-default" value="Send" />
+
+                    </form>
+
+
+                </div>
+            </div>
+        </div> <!-- .panel -->
+}
+
+    </div> <!-- .panel-group -->
+</div> <!-- .container -->
+
+
+
+@section scripts{
+
+    <script src="~/Scripts/jquery.unobtrusive-ajax.js"></script>
+    <script>
+        function formSuccess(data) {
+            if (data.isSuccess) {
+                alert("Your email has been successfully " + data.message);
+            }
+            else {
+                alert( data.message);
+            }
+        }
+    </script>
+
+    <script type='text/javascript'>
+        // alert("your email has been successfully sent to all students in th")
+        $(document).on('click', '.panel-heading span.clickable', function (e) {
+            var $this = $(this);
+            if (!$this.hasClass('panel-collapsed')) {
+                $this.parents('.panel').find('.panel-body').slideUp();
+                $this.addClass('panel-collapsed');
+                $this.find('i').removeClass('glyphicon-chevron-up').addClass('glyphicon-chevron-down');
+            } else {
+                $this.parents('.panel').find('.panel-body').slideDown();
+                $this.removeClass('panel-collapsed');
+                $this.find('i').removeClass('glyphicon-chevron-down').addClass('glyphicon-chevron-up');
+            }
+        })
+    </script>
+}

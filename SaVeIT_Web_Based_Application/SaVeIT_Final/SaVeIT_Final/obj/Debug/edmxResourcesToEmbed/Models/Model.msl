@@ -1,0 +1,147 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="SaVeITModelStoreContainer" CdmEntityContainer="Entities">
+    <EntitySetMapping Name="AreaOFInterests">
+      <EntityTypeMapping TypeName="SaVeITModel.AreaOFInterest">
+        <MappingFragment StoreEntitySet="AreaOFInterest">
+          <ScalarProperty Name="AOIId" ColumnName="AOIId" />
+          <ScalarProperty Name="AOIName" ColumnName="AOIName" />
+          <ScalarProperty Name="AOIIcon" ColumnName="AOIIcon" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Awards">
+      <EntityTypeMapping TypeName="SaVeITModel.Award">
+        <MappingFragment StoreEntitySet="Award">
+          <ScalarProperty Name="awardId" ColumnName="awardId" />
+          <ScalarProperty Name="awardName" ColumnName="awardName" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="News">
+      <EntityTypeMapping TypeName="SaVeITModel.News">
+        <MappingFragment StoreEntitySet="News">
+          <ScalarProperty Name="newId" ColumnName="newId" />
+          <ScalarProperty Name="newName" ColumnName="newName" />
+          <ScalarProperty Name="newImg" ColumnName="newImg" />
+          <ScalarProperty Name="newDate" ColumnName="newDate" />
+          <ScalarProperty Name="newContent" ColumnName="newContent" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ProjectAwards">
+      <EntityTypeMapping TypeName="SaVeITModel.ProjectAward">
+        <MappingFragment StoreEntitySet="ProjectAward">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="AwardId" ColumnName="AwardId" />
+          <ScalarProperty Name="ProjectId" ColumnName="ProjectId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ProjectsAOIs">
+      <EntityTypeMapping TypeName="SaVeITModel.ProjectsAOI">
+        <MappingFragment StoreEntitySet="ProjectsAOI">
+          <ScalarProperty Name="SPtId" ColumnName="SPtId" />
+          <ScalarProperty Name="AOIId" ColumnName="AOIId" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="SeniorProjects">
+      <EntityTypeMapping TypeName="SaVeITModel.SeniorProject">
+        <MappingFragment StoreEntitySet="SeniorProject">
+          <ScalarProperty Name="SPtId" ColumnName="SPtId" />
+          <ScalarProperty Name="SPName" ColumnName="SPName" />
+          <ScalarProperty Name="SPAbstract" ColumnName="SPAbstract" />
+          <ScalarProperty Name="SPGrade" ColumnName="SPGrade" />
+          <ScalarProperty Name="SPReport" ColumnName="SPReport" />
+          <ScalarProperty Name="SPVideos" ColumnName="SPVideos" />
+          <ScalarProperty Name="supervisorId" ColumnName="supervisorId" />
+          <ScalarProperty Name="supervisorUserId" ColumnName="supervisorUserId" />
+          <ScalarProperty Name="awardId" ColumnName="awardId" />
+          <ScalarProperty Name="progLang" ColumnName="progLang" />
+          <ScalarProperty Name="SPReportName" ColumnName="SPReportName" />
+          <ScalarProperty Name="Year" ColumnName="Year" />
+          <ScalarProperty Name="Section" ColumnName="Section" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Stu_Projects">
+      <EntityTypeMapping TypeName="SaVeITModel.Stu_Projects">
+        <MappingFragment StoreEntitySet="Stu_Projects">
+          <ScalarProperty Name="PId" ColumnName="PId" />
+          <ScalarProperty Name="StuId" ColumnName="StuId" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="studentUserId" ColumnName="studentUserId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Students">
+      <EntityTypeMapping TypeName="SaVeITModel.Student">
+        <MappingFragment StoreEntitySet="Student">
+          <ScalarProperty Name="studentId" ColumnName="studentId" />
+          <ScalarProperty Name="studentName" ColumnName="studentName" />
+          <ScalarProperty Name="studentEmail" ColumnName="studentEmail" />
+          <ScalarProperty Name="groupId_SPtId" ColumnName="groupId_SPtId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="SupAOIs">
+      <EntityTypeMapping TypeName="SaVeITModel.SupAOI">
+        <MappingFragment StoreEntitySet="SupAOI">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="AOIId" ColumnName="AOIId" />
+          <ScalarProperty Name="supervisorId" ColumnName="supervisorId" />
+          <ScalarProperty Name="supervisorUserId" ColumnName="supervisorUserId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="SupervisorRoles">
+      <EntityTypeMapping TypeName="SaVeITModel.SupervisorRole">
+        <MappingFragment StoreEntitySet="SupervisorRole">
+          <ScalarProperty Name="roleId" ColumnName="roleId" />
+          <ScalarProperty Name="roleName" ColumnName="roleName" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Supervisors">
+      <EntityTypeMapping TypeName="SaVeITModel.Supervisor">
+        <MappingFragment StoreEntitySet="Supervisors">
+          <ScalarProperty Name="supervisorId" ColumnName="supervisorId" />
+          <ScalarProperty Name="supervisorName" ColumnName="supervisorName" />
+          <ScalarProperty Name="supervisorEmail" ColumnName="supervisorEmail" />
+          <ScalarProperty Name="supervisorRole" ColumnName="supervisorRole" />
+          <ScalarProperty Name="password" ColumnName="password" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="UserRoles">
+      <EntityTypeMapping TypeName="SaVeITModel.UserRole">
+        <MappingFragment StoreEntitySet="UserRole">
+          <ScalarProperty Name="userId" ColumnName="userId" />
+          <ScalarProperty Name="userName" ColumnName="userName" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Users">
+      <EntityTypeMapping TypeName="SaVeITModel.User">
+        <MappingFragment StoreEntitySet="Users">
+          <ScalarProperty Name="userId" ColumnName="userId" />
+          <ScalarProperty Name="userName" ColumnName="userName" />
+          <ScalarProperty Name="userEmail" ColumnName="userEmail" />
+          <ScalarProperty Name="userRole" ColumnName="userRole" />
+          <ScalarProperty Name="password" ColumnName="password" />
+          <ScalarProperty Name="projectGroup" ColumnName="projectGroup" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <FunctionImportMapping FunctionName="SaVeITModel.Store.udf_Str_Parse" FunctionImportName="udf_Str_Parse">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="SaVeITModel.udf_Str_Parse_Result">
+          <ScalarProperty Name="RetSeq" ColumnName="RetSeq" />
+          <ScalarProperty Name="RetVal" ColumnName="RetVal" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+  </EntityContainerMapping>
+</Mapping>
